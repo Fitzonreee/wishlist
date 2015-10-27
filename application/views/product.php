@@ -28,7 +28,7 @@
 	        <div class="col s12 m8">
 	          <div class="card">
 	            <div class="card-image">
-	              <img src="images/sample-1.jpg">
+	              <img src="assets/imgs/scooter.jpg">
 	              <span class="card-title">Card Title</span>
 	            </div>
 	            <div class="card-content">
