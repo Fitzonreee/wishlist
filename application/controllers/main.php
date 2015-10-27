@@ -16,7 +16,7 @@ class Main extends CI_Controller {
 		$this->load->view('login');
 	}
 	public function home(){
-		$this->load->view('preferences');
+		$this->load->view('product');
 	}
 
 

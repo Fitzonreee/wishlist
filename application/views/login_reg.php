@@ -21,16 +21,12 @@
 		<div class="container">
 			<div class="row">
 			 	<!-- REGISTRATION -->
-			    <form class="col m5">
+			    <form class="col m5 s12">
+			    <h4 class="form_label">Register</h4>
 			      <div class="row">
-			        <h4 class="form_label">Register</h4>
-			        <div class="input-field col s6">
-			          <input id="first_name" type="text" class="validate">
-			          <label for="first_name">First Name</label>
-			        </div>
-			        <div class="input-field col s6">
-			          <input id="last_name" type="text" class="validate">
-			          <label for="last_name">Last Name</label>
+			        <div class="input-field col s12">
+			          <input id="username" type="email" class="validate">
+			          <label for="username">Username</label>
 			        </div>
 			      </div>
 			      <div class="row">
@@ -54,12 +50,12 @@
 			    </form>
 			    <!-- LOGIN -->
 			    <!-- needs responsive work -->
-			    <form class="col m5 offset-m2">
+			    <form class="col m5 offset-m2 s12">
 			      <h4 class="form_label">Login</h4>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="login_email" type="email" class="validate">
-			          <label for="login_email">Email</label>
+			          <input id="login_username" type="email" class="validate">
+			          <label for="login_username">Username</label>
 			        </div>
 			      </div>
 			      <div class="row">
