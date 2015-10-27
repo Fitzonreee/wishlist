@@ -15,14 +15,14 @@
 		<nav>
 		    <div class="nav-wrapper">
 		      <!-- needs responsive work -->
-		      <a href="#" class="brand-logo center" id="logo"><i class="material-icons" id="list_view">view_list</i>Wishlist</a>
+		      <a href="#" class="brand-logo center" id="logo"><i class="material-icons hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
 		    </div>
 		</nav>
 		<div class="container">
 			<div class="row">
 				<div class="col m5">
 					<h4 class="form_label">Preferences</h4>
-					<form action="#" class="center-align">
+					<form action="#" class="center-align offset-m2">
 					    <p>
 					      <input type="checkbox" class="filled-in" id="filled-in-box_1" />
 					      <label for="filled-in-box_1">Arts and Crafts</label>
@@ -49,6 +49,7 @@
 			    <form class="col m5 offset-m2">
 			      <div class="row">
 			        <h4 class="form_label">Billing Information</h4>
+			        
 			        <div class="input-field col s6">
 			          <input id="first_name" type="text" class="validate">
 			          <label for="first_name">First Name</label>
@@ -58,6 +59,7 @@
 			          <label for="last_name">Last Name</label>
 			        </div>
 			      </div>
+			      
 			      <div class="row">
 			        <div class="input-field col s12">
 			          <input id="email" type="email" class="validate">
