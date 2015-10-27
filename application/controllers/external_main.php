@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class External_Main extends CI_Controller {
 
 	public function __construct(){
 		parent:: __construct();
-		// if (!$this->session->userdata("user_id")) {
+		// if ($this->session->userdata("user_id")) {
 		// 	redirect("/");
 		// }
 		//$this->output->enable_profiler(TRUE);
