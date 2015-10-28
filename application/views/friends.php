@@ -18,7 +18,7 @@
 		      <a href="#" class="brand-logo center" id="logo"><i class="material-icons left hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
 		      <ul id="nav-mobile" class="left hide-on-med-and-down">
 		        <li><a href="#">My List</a></li>
-		        <li><a href="#">Friends</a></li>
+		        <li class="active"><a href="#">Friends</a></li>
 		        <li><a href="#">Settings</a></li>
 		      </ul>
 		    </div>

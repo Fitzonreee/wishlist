@@ -1,7 +1,16 @@
 
 /*************************
+  		GENERAL
+*************************/
+
+body {
+	background-image: url("../imgs/greyzz_@2X.png") !important;
+}
+
+/*************************
 		 NAV
 *************************/
+
 
 .brand-logo {
 	font-weight: 100;
@@ -31,6 +40,7 @@
 	border: 1px solid black;
 	padding: 15px;
 	text-align: center;
+	background-color: white;
 }
 
 .page-footer {
@@ -74,6 +84,70 @@
 .title {
 	text-transform: none;
 }
+
+.price {
+	font-weight: 400 !important;
+	background-color: #ffd740;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+.padding {
+	padding-top: 10px;
+}
+/*************************
+      Form inputs
+*************************/
+
+/* label color */
+.input-field label {
+ color: #000;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+ color: #000;
+}
+
+/* label focus color */
+.input-field input[type=email]:focus + label {
+ color: #000;
+}
+
+/* label focus color */
+.input-field input[type=password]:focus + label {
+ color: #000;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+/* label underline focus color */
+.input-field input[type=email]:focus {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+/* label underline focus color */
+.input-field input[type=password]:focus {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+/* valid color */
+.input-field input[type=text].valid {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+ border-bottom: 1px solid #000;
+ box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+ color: #000;
+}
+
+
 /*************************
   Sticky Footer - broken
 *************************/

@@ -65,8 +65,8 @@ class User extends CI_Model {
 
 	/*Friendships*/
 	public function get_friends($user_id){
-		$query = "SELECT concat(friends.first_name, ' ', friends.last_name) AS name, friends.user_id AS user_id FROM users JOIN friendships ON users.user_id = friendships.user_id JOIN users as friends ON friends.friend_id = friends.user_id WHERE users.user_id = ?";
-		return $this->db->query($query, $user_id)->result_array();
+		$query = "SELECT concat(friends.first_name, ' ', friends.last_name) AS name, friends.id AS user_id FROM users JOIN friendships ON users.id = friendships.user_id JOIN users as friends ON friendships.friend_id = friends.id WHERE users.id = ?";
+		return $this->db->query($query, $this->session->userdata('id'))->result_array();
 	}
 	public function create_friendship($user_id, $friend_id){
 		$query = "INSERT INTO friendships (user_id, friend_id) VALUES (?, ?), (?, ?);";
@@ -102,7 +102,7 @@ class User extends CI_Model {
 
 	/*User Settings*/
 	public function update_user($info){
-		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, date_updated = NOW() WHERE user_id = ?";
+		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, date_updated = NOW() WHERE id = ?";
 		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_id"]];
 
 		return $this->db->query($query, $values);
@@ -120,11 +120,11 @@ class User extends CI_Model {
     }
 	}
 	public function update_password($info){
-		$q = $this->db->query("SELECT salt FROM users WHERE user_id = ?", $info["user_id"])->row_array();
+		$q = $this->db->query("SELECT salt FROM users WHERE id = ?", $info["user_id"])->row_array();
 		$salt = $q["salt"];
 		$encryptpass = md5($info["password"] . '' . $salt);
 
-		$query = "UPDATE users SET password = ?, date_updated = NOW() WHERE user_id = ?";
+		$query = "UPDATE users SET password = ?, date_updated = NOW() WHERE id = ?";
 		$values = [$encryptpass, $info["user_id"]];
 
 		return $this->db->query($query, $values);
@@ -141,7 +141,7 @@ class User extends CI_Model {
     }
 	}
 	public function delete_user($id){
-		$query = "DELETE FROM users WHERE user_id = ?";
+		$query = "DELETE FROM users WHERE id = ?";
 		return $this->db->query($query, $id);
 	}
 

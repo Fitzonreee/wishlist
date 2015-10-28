@@ -16,8 +16,8 @@
 	</head>
 	<body>
 		<h1>Item already in added!</h1>
-		<form action = '/products'>
-			<button type="submit" class="btn btn-success">Back to Friend's Wishlist</button>
+		<form action = '/wishlists/my_list'>
+			<button type="submit" class="btn btn-success">Back to My Wishlist</button>
 		</form>
 	</body>
 </html>

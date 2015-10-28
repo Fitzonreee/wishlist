@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Wishlist - Products</title>
+		<title>Wishlist - Product</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!-- Compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
@@ -24,29 +24,6 @@
 		      </ul>
 		    </div>
 		</nav>
-		<div class="container">
-	      <div class="row">
-	      <h4 class="form_label"><?= $data[0]['first_name']?>'s Wishlist</h4>
-	      <?
-	      	foreach($data as $item){ ?>
-	      	<div class="col s12 m3">
-	          <div class="card grey lighten-1">
-	            <div class="card-content">
-	              <img src="<?= $item['image_url'] ?>" width= 100%>
-	            </div>
-	            <div class="card-action">
-	              <a href="#"><span class="black-text title"><?= $item['name'] ?></span></a>
-	              <a href="/wishlists/add_my_list/<?= $item['product_id'] ?>"><i class="material-icons amber-text accent-2-text right">add</i></a>
-	              <a class="waves-effect waves-light btn amber accent-2 black-text gift"><i class="material-icons left black-text">payment</i>Buy gift</a>
-	            </div>
-	          </div>
-	        </div>
-	        <?
-	      }
-	      ?>
-	      </div> <!-- end of row -->
-		</div> <!-- end of container -->
 
-		
-	</body>
+		</body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Wishlist - Home</title>
+		<title>Wishlist - Product</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!-- Compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
@@ -14,15 +14,19 @@
 	<body>
 		<nav>
 		    <div class="nav-wrapper">
-		      <!-- needs responsive work -->
-		      <a href="#" class="brand-logo center" id="logo"><i class="material-icons" id="list_view">view_list</i>Wishlist</a>
+		      <a href="#" class="brand-logo center" id="logo"><i class="material-icons left hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
+		      <ul id="nav-mobile" class="left hide-on-med-and-down">
+		        <li><a href="#">My List</a></li>
+		        <li><a href="#">Friends</a></li>
+		        <li class="active"><a href="#">Settings</a></li>
+		      </ul>
 		    </div>
 		</nav>
 		<div class="container">
 			<div class="row">
-			 	<!-- REGISTRATION -->
+			 	<!-- CHANGE INFORMATION -->
 			    <form class="col m5 s12">
-			    <h4 class="form_label">Register</h4>
+			    <h4 class="form_label">Change Information</h4>
 			      <div class="row">
 			        <div class="input-field col s6">
 			          <input id="first_name" type="text" name="first_name" class="validate">
@@ -39,52 +43,27 @@
 			          <label for="email">Email</label>
 			        </div>
 			      </div>
-			      <div class="row">
-			        <div class="input-field col s12">
-			          <input id="password" type="password" name="password" class="validate">
-			          <label for="password">Password</label>
-			        </div>
-			      </div>
-			      <div class="row">
-			        <div class="input-field col s12">
-			          <input id="confirm_password" type="password" name="confirm_password" class="validate">
-			          <label for="confirm_password">Confirm Password</label>
-			        </div>
-			      </div>
 			    </form>
-			    <!-- LOGIN -->
+			    <!-- RESET PASSWORD -->
 			    <!-- needs responsive work -->
 			    <form class="col m5 offset-m2 s12">
 			      <h4 class="form_label">Reset Password</h4>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="login_email" type="email" name="email" class="validate">
-			          <label for="login_email">Email</label>
+			          <input id="password" type="email" name="email" class="validate">
+			          <label for="password">New Password</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="login_password" type="password" name="password" class="validate">
-			          <label for="login_password">Password</label>
+			          <input id="confirm_password" type="password" name="password" class="validate">
+			          <label for="confirm_password">Password</label>
 			        </div>
 			      </div>
 			    </form>
 			</div> <!-- end of row -->
 		</div> <!-- end of container -->
 
-		<footer class="page-footer">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text"></h5>
-              </div>
-      		</div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2015 Copyright 
-            </div>
-          </div>
-        </footer>
+		
 	</body>
 </html>

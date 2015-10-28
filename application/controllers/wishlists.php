@@ -11,9 +11,13 @@ class Wishlists extends CI_Controller {
 			$this->Wishlist->add($newitem);
 			redirect('/wishlists/viewcart');
 		}
-
-		
 	}
+
+		public function my_list(){
+		$data['items'] = $this->wishlist->get_all($this->session->userdata('id'));
+		$this->load->view('my_list', $data);
+		}
+
 	public function viewcart(){
 		$data['items'] = $this->Wishlist->get_all();
 		$this->load->view('temp_wishlist', $data);
@@ -28,5 +32,23 @@ class Wishlists extends CI_Controller {
 		redirect('/wishlists/viewcart');
 	}
 
-	
+	public function add_my_list($id){
+		if($this->wishlist->get_item($id)){
+			$this->load->view('errors');
+		}
+		else{
+			$this->wishlist->add($id);
+			redirect('/wishlists/my_list');
+		}
+	}
+
+	public function friends_list($id){
+		$list['data'] = $this->wishlist->get_all($id);
+		$this->load->view('friend_list', $list);
+	}
+
+	public function delete($id){
+		$this->wishlist->delete($id);
+		redirect('/wishlists/my_list');
+	}
 }
