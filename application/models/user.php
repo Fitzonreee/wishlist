@@ -8,7 +8,6 @@ class User extends CI_Model {
 
 	/*Registration*/
 	public function validate_register($data){
-    $this->form_validation->set_rules('username', 'Username', 'real_escape_string|xss_clean|trim|required');
     $this->form_validation->set_rules('first_name', 'First Name', 'real_escape_string|xss_clean|trim|required');
     $this->form_validation->set_rules('last_name', 'Last Name', 'real_escape_string|xss_clean|trim|required');
     $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|required|valid_email|is_unique[users.email]');
@@ -21,9 +20,9 @@ class User extends CI_Model {
     }
 	}
 	public function add_user($info){
-		$query = "INSERT INTO users (username, first_name, last_name, email, password, salt, created_at, updated_at) VALUES (?,?,?,?,?,?,NOW(),NOW())";
+		$query = "INSERT INTO users (first_name, last_name, email, password, salt, created_at, updated_at) VALUES (?,?,?,?,?,?,NOW(),NOW())";
 		$encryption = $this->encrypt_password($info["password"]);
-		$values = [$info["username"], $info['first_name'], $info["last_name"], $info["email"], $encryption['password'], $encryption['salt']];
+		$values = [$info['first_name'], $info["last_name"], $info["email"], $encryption['password'], $encryption['salt']];
 
 		return $this->db->query($query, $values);
 	}
@@ -66,7 +65,7 @@ class User extends CI_Model {
 
 	/*Friendships*/
 	public function get_friends($user_id){
-		$query = "SELECT friends.username AS username, friends.user_id AS user_id FROM users JOIN friendships ON users.user_id = friendships.user_id JOIN users as friends ON friends.friend_id = friends.user_id WHERE users.user_id = ?";
+		$query = "SELECT concat(friends.first_name, ' ', friends.last_name) AS name, friends.user_id AS user_id FROM users JOIN friendships ON users.user_id = friendships.user_id JOIN users as friends ON friends.friend_id = friends.user_id WHERE users.user_id = ?";
 		return $this->db->query($query, $user_id)->result_array();
 	}
 	public function create_friendship($user_id, $friend_id){
@@ -101,9 +100,52 @@ class User extends CI_Model {
 	}
 
 
+	/*User Settings*/
+	public function update_user($info){
+		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, date_updated = NOW() WHERE user_id = ?";
+		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_id"]];
 
+		return $this->db->query($query, $values);
+	}
+	public function validate_update($data){
+    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|valid_email');
+    $this->form_validation->set_rules('first_name', 'First Name', 'real_escape_string|xss_clean|trim');
+    $this->form_validation->set_rules('last_name', 'Last Name', 'real_escape_string|xss_clean|trim');
 
+    if($this->form_validation->run()) {
+      return "valid";
+    }
+    else {
+      return array(validation_errors());
+    }
+	}
+	public function update_password($info){
+		$q = $this->db->query("SELECT salt FROM users WHERE user_id = ?", $info["user_id"])->row_array();
+		$salt = $q["salt"];
+		$encryptpass = md5($info["password"] . '' . $salt);
 
+		$query = "UPDATE users SET password = ?, date_updated = NOW() WHERE user_id = ?";
+		$values = [$encryptpass, $info["user_id"]];
+
+		return $this->db->query($query, $values);
+	}
+	public function validate_change_password($data){
+    $this->form_validation->set_rules('password', 'Password', 'real_escape_string|xss_clean|trim|required|min_length[1]|matches[confirm_password]');
+    $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'real_escape_string|xss_clean|trim|required');
+
+    if($this->form_validation->run()) {
+      return "valid";
+    }
+    else {
+      return array(validation_errors());
+    }
+	}
+	public function delete_user($id){
+		$query = "DELETE FROM users WHERE user_id = ?";
+		return $this->db->query($query, $id);
+	}
+
+	/*Generic Getters*/
 	public function get_all(){
 		$query = "SELECT user_id, concat(first_name, ' ', last_name) AS name, email, date_created, user_level FROM users";
 		return $this->db->query($query)->result_array();
@@ -113,33 +155,14 @@ class User extends CI_Model {
 		return $this->db->query($query, $email)->row_array();
 	}
 	public function get_user_by_id($id){
-		$query = "SELECT user_id, first_name, last_name, email, created_at FROM users WHERE user_id = ?";
+		$query = "SELECT user_id, first_name, last_name, email FROM users WHERE user_id = ?";
 		return $this->db->query($query, $id)->row_array();
 	}
 
-	public function delete($id){
-		$query = "DELETE FROM users WHERE user_id = ?";
-		return $this->db->query($query, $id);
-	}
+	/*Admin Functions*/
 	public function update_user_admin($info){
 		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, user_level = ?, description = ?, date_updated = NOW() WHERE user_id = ?";
 		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_level"], $info["description"], $info["user_id"]];
-
-		return $this->db->query($query, $values);
-	}
-	public function update_user_normal($info){
-		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, description = ?, date_updated = NOW() WHERE user_id = ?";
-		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["description"], $info["user_id"]];
-
-		return $this->db->query($query, $values);
-	}
-	public function update_password($info){
-		$q = $this->db->query("SELECT salt FROM users WHERE user_id = ?", $info["user_id"])->row_array();
-		$salt = $q["salt"];
-		$encryptpass = md5($info["password"] . '' . $salt);
-
-		$query = "UPDATE users SET password = ?, date_updated = NOW() WHERE user_id = ?";
-		$values = [$encryptpass, $info["user_id"]];
 
 		return $this->db->query($query, $values);
 	}
@@ -157,29 +180,4 @@ class User extends CI_Model {
       return array(validation_errors());
     }
 	}
-	public function validate_update_normal($data){
-    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|valid_email');
-    $this->form_validation->set_rules('first_name', 'First Name', 'real_escape_string|xss_clean|trim');
-    $this->form_validation->set_rules('last_name', 'Last Name', 'real_escape_string|xss_clean|trim');
-    $this->form_validation->set_rules('description', 'Description', 'real_escape_string|xss_clean|trim');
-
-    if($this->form_validation->run()) {
-      return "valid";
-    }
-    else {
-      return array(validation_errors());
-    }
-	}
-	public function validate_change_password($data){
-    $this->form_validation->set_rules('password', 'Password', 'real_escape_string|xss_clean|trim|required|min_length[1]|matches[confirm_password]');
-    $this->form_validation->set_rules('confirm_password', 'Password Confirmation', 'real_escape_string|xss_clean|trim|required');
-
-    if($this->form_validation->run()) {
-      return "valid";
-    }
-    else {
-      return array(validation_errors());
-    }
-	}
-	
 }

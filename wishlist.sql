@@ -19,7 +19,6 @@ USE `wishlist` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `wishlist`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
-  `username` VARCHAR(45) NULL COMMENT '',
   `first_name` VARCHAR(45) NULL COMMENT '',
   `last_name` VARCHAR(45) NULL COMMENT '',
   `email` VARCHAR(255) NULL COMMENT '',

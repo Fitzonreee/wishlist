@@ -30,12 +30,12 @@ class Users extends CI_Controller {
 		$result = $this->user->validate_login($this->input->post());
 		if ($result == "valid") {
 			$this->set_userinfo();
-			redirect("/dashboard/home");
+			redirect("/main/home");
 		}
 		else {
 			$errors = $result;
 			$this->session->set_flashdata('errors', $errors);
-			redirect("/dashboard/login");
+			redirect("/");
 		}
 	}
 	public function logout(){
@@ -51,60 +51,98 @@ class Users extends CI_Controller {
 		$this->session->set_userdata("created_at", $userinfo["created_at"]);
 	}
 	public function add_friend($me, $them){
-		$this->user->create_request($me, $them);
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+			$result = $this->user->create_request($me, $them);
+
+			if ($result) {
+				$success[] = 'Friend request sent.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Failed to send friend request.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/main/show/$them"); //!!!!!may have to change later
+		}
+		redirect("/");
 	}
 	public function remove_friend($me, $them){
-		$this->user->remove_friendship($me, $them);
-	}
-	public function cancel_friend_req($me, $them){
-		$this->user->delete_request($me, $them);
-	}
-	public function accept_friend_req($them, $me){
-		$this->user->create_friendship($me, $them);
-		$this->user->delete_request($them, $me);
-	}
-	public function reject_friend_req($them, $me){
-		$this->user->delete_request($them, $me);
-	}
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+			$result = $this->user->remove_friendship($me, $them);
 
-	//add friend requests table
-	//change user settings
-	//add billing info
-	//add shipping info
-	//edit those
-	
-	
-	public function delete(){
-		if ($this->session->userdata("user_id")) {
-			$temp = $this->user->get_user_by_id($this->session->userdata("user_id"));
-			if ($temp["user_level"] == 9) {
-				$result = $this->user->delete($this->input->post("delete"));
-				if ($result) {
-					$success[] = 'Deletion succesful.';
-		      $this->session->set_flashdata('success', $success);
-				}
-				else {
-					$errors = [validation_errors()];
-					$this->session->set_flashdata('errors', $errors);
-				}
+			if ($result) {
+				$success[] = 'Friend removed.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Unable to remove friend at this time.";
+				$this->session->set_flashdata('errors', $errors);
 			}
 		}
 		redirect("/");
 	}
-	public function edit_info($target_id){
-		if ($this->session->userdata("user_id")) {
-			$temp = $this->user->get_user_by_id($this->session->userdata("user_id"));
-			$data = $this->input->post();
-			$data["user_id"] = $target_id;
-			if ($temp["user_level"] == 9) {
-				if ($this->user->validate_update_admin($data) == "valid") {
-					$result = $this->user->update_user_admin($data);
+	public function cancel_friend_req($me, $them){
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+			$result = $this->user->delete_request($me, $them);
+
+			if ($result) {
+				$success[] = 'Friend request cancelled.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Couldn't cancel friend request at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/main/show/$them"); //!!!!! may have to change later
+		}
+		redirect("/");
+	}
+	public function accept_friend_req($them, $me){
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+			$result = $this->user->create_friendship($me, $them);
+
+			if ($result) {
+				$result = $this->user->delete_request($them, $me);
+
+				if ($result) {
+					$success[] = 'Friend added!';
+		      $this->session->set_flashdata('success', $success);
+				}
+				else{
+					$errors = "Couldn't add friend at this time, delreq failed.";
+					$this->session->set_flashdata('errors', $errors);
 				}
 			}
 			else {
-				if ($this->user->validate_update_normal($data) == "valid") {
-					$result = $this->user->update_user_normal($data);
-				}
+				$errors = "Couldn't add friend at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/main/show/$me"); //!!!!! may have to change later
+		}
+		redirect("/");
+	}
+	public function reject_friend_req($them, $me){
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+			$result = $this->user->delete_request($them, $me);
+
+			if ($result) {
+				$success[] = 'Friend request ignored.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Couldn't ignore friend request at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/main/show/$me"); //!!!!! may have to change later
+		}
+		redirect("/");
+	}
+	public function edit_info($target_id){
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
+			$data = $this->input->post();
+			$data["user_id"] = $target_id; //!!!!!used for admin deletion, if we decide to
+			if ($this->user->validate_update($data) == "valid") {
+				$result = $this->user->update_user_admin($data);
 			}
 
 			if ($result) {
@@ -115,15 +153,14 @@ class Users extends CI_Controller {
 				$errors = [validation_errors()];
 				$this->session->set_flashdata('errors', $errors);
 			}
-			redirect("dashboard/edit/$target_id");
+			redirect("/main/edit/$target_id"); //!!!!!may have to change later
 		}
 		redirect("/");
 	}
 	public function change_password($target_id){
-		if ($this->session->userdata("user_id")) {
-			$temp = $this->user->get_user_by_id($this->session->userdata("user_id"));
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
 			$data = $this->input->post();
-			$data["user_id"] = $target_id;
+			$data["user_id"] = $target_id; //!!!!!used for admin deletion, if we decide to
 			if ($this->user->validate_change_password($data) == "valid") {
 				$result = $this->user->update_password($data);
 			}
@@ -136,8 +173,27 @@ class Users extends CI_Controller {
 				$errors = [validation_errors()];
 				$this->session->set_flashdata('errors', $errors);
 			}
-			redirect("dashboard/edit/$target_id");
+			redirect("/main/edit/$target_id"); //!!!!!may have to change later
 		}
 		redirect("/");
 	}
+	public function delete($target_id){
+		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
+			$result = $this->user->delete($target_id);
+			if ($result) {
+				$this->session->sess_destroy();
+				$success[] = 'Deletion succesful.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Unable to delete user at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+		}
+		redirect("/");
+	}
+
+	//add billing info
+	//add shipping info
+	//edit those
 }
