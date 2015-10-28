@@ -18,54 +18,46 @@
 		      <ul id="nav-mobile" class="left hide-on-med-and-down">
 		        <li><a href="#">My List</a></li>
 		        <li><a href="#">Friends</a></li>
-		        <li><a href="#">Settings</a></li>
+		        <li class="active"><a href="#">Settings</a></li>
 		      </ul>
 		    </div>
 		</nav>
 		<div class="container">
 			<div class="row">
-			 	<!-- EDIT INFO -->
+			 	<!-- CHANGE INFORMATION -->
 			    <form class="col m5 s12">
 			    <h4 class="form_label">Change Information</h4>
 			      <div class="row">
-			        <div class="input-field col s12">
-			          <input id="username" type="email" class="validate">
-			          <label for="username">Username</label>
+			        <div class="input-field col s6">
+			          <input id="first_name" type="text" name="first_name" class="validate">
+			          <label for="first_name">First Name</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <input id="last_name" type="text" name="last_name" class="validate">
+			          <label for="last_name">Last Name</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="email" type="email" class="validate">
+			          <input id="email" type="email" name="email" class="validate">
 			          <label for="email">Email</label>
 			        </div>
 			      </div>
-			      <div class="row">
-			        <div class="input-field col s12">
-			          <input id="password" type="password" class="validate">
-			          <label for="password">Password</label>
-			        </div>
-			      </div>
-			      <div class="row">
-			        <div class="input-field col s12">
-			          <input id="confirm_password" type="password" class="validate">
-			          <label for="confirm_password">Confirm Password</label>
-			        </div>
-			      </div>
 			    </form>
-			    <!-- LOGIN -->
+			    <!-- RESET PASSWORD -->
 			    <!-- needs responsive work -->
 			    <form class="col m5 offset-m2 s12">
-			      <h4 class="form_label">Login</h4>
+			      <h4 class="form_label">Reset Password</h4>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="login_username" type="email" class="validate">
-			          <label for="login_username">Username</label>
+			          <input id="password" type="email" name="email" class="validate">
+			          <label for="password">New Password</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="login_password" type="password" class="validate">
-			          <label for="login_password">Password</label>
+			          <input id="confirm_password" type="password" name="password" class="validate">
+			          <label for="confirm_password">Password</label>
 			        </div>
 			      </div>
 			    </form>

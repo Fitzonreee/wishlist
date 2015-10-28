@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Wishlist - Product</title>
+		<title>Wishlist - Product Information</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!-- Compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
@@ -14,35 +14,40 @@
 	<body>
 		<nav>
 		    <div class="nav-wrapper">
-		      <!-- needs responsive work -->
 		      <a href="#" class="brand-logo center" id="logo"><i class="material-icons left hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
 		      <ul id="nav-mobile" class="left hide-on-med-and-down">
 		        <li><a href="#">My List</a></li>
-		        <li class="active"><a href="#">Friends</a></li>
+		        <li><a href="#">Friends</a></li>
 		        <li><a href="#">Settings</a></li>
 		      </ul>
 		    </div>
 		</nav>
 		<div class="container">
-			<div class="row"  id="collection_top">
-				<div class="col m6 offset-m3">
-					<div class="input-field grey lighten-4">
-			          <input class="grey lighten-4" id="search" type="search" required>
-			          <label for="search"><i class="material-icons">search</i></label>
-			        </div>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col m6 offset-m3">
-					<ul class="collection with-header">
-				        <li class="collection-header center-align"><h4>Friends</h4></li>
-				        <li class="collection-item"><div>Ryan<a href="#!" class="secondary-content"><i class="material-icons grey-text darken-4-text">view_list</i></a></div></li>
-				        <li class="collection-item"><div>Jeff<a href="#!" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
-				        <li class="collection-item"><div>Kevin<a href="#!" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
-				        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
-				    </ul>
+					<h4 class="form_label" id="margin_bottom">Product Information</h4>
 				</div> <!--end of col m6 -->
 			</div> <!-- end of row -->
+
+			<div class="row">
+	        <div class="col s12 m6 offset-m3">
+	          <div class="card">
+	          	<!-- size of area will change depending on the size of img-->
+	            <div class="card-image">
+	              <img src="assets/imgs/scooter.jpg">
+	            </div>
+	            <div class="card-content">
+	              
+	            </div>
+	            <div class="card-action grey lighten-1">
+	              <span class="card-title black-text">Scooter</span>
+	              <span class="card-title black-text right price">$299.99</span>
+	              <p class="padding">I can put whatever information we get from the API here in a list format - size, weight, etc</p>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+		
 		</div> <!-- end of container -->
 
 		
