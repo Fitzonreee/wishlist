@@ -17,9 +17,10 @@
 		      <!-- needs responsive work -->
 		      <a href="#" class="brand-logo center" id="logo"><i class="material-icons left hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
 		      <ul id="nav-mobile" class="left hide-on-med-and-down">
-		        <li><a href="#">My List</a></li>
-		        <li class="active"><a href="#">Friends</a></li>
+		        <li><a href="/wishlists/my_list">My List</a></li>
+		        <li><a href="/main/friends">Friends</a></li>
 		        <li><a href="#">Settings</a></li>
+		        <li><a href="#">My Cart</a></li>
 		      </ul>
 		    </div>
 		</nav>
@@ -35,11 +36,15 @@
 			<div class="row">
 				<div class="col m6 offset-m3">
 					<ul class="collection with-header">
-				        <li class="collection-header center-align"><h4>Friends</h4></li>
-				        <li class="collection-item"><div>Ryan<a href="#!" class="secondary-content"><i class="material-icons grey-text darken-4-text">view_list</i></a></div></li>
-				        <li class="collection-item"><div>Jeff<a href="#!" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
-				        <li class="collection-item"><div>Kevin<a href="#!" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
-				        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
+						<li class="collection-header center-align"><h4>Friends</h4></li>
+						<?
+							foreach($friends as $friend){
+								?>
+								<li class="collection-item"><div><?= $friend['name'] ?><a href="/wishlists/friends_list/<?= $friend['user_id'] ?>" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
+						<?
+							}
+				       ?>
+
 				    </ul>
 				</div> <!--end of col m6 -->
 			</div> <!-- end of row -->
