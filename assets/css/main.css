@@ -50,3 +50,64 @@
 	margin-bottom: 0;
 }
 
+/*************************
+	    Product
+*************************/
+
+#card_margin_top {
+	margin-top: 30px;
+}
+
+.card-content img {
+	width: 100% !important;
+}
+
+#collection_top {
+	margin-top: 60px;
+}
+
+.gift {
+	margin: 15px 0 5px 0 !important;
+	width: 100%
+}
+
+.title {
+	text-transform: none;
+}
+/*************************
+  Sticky Footer - broken
+*************************/
+
+ body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************************
+	   end of file
+*************************/
+
