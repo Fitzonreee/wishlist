@@ -8,15 +8,10 @@ class Users extends CI_Controller {
 	public function register(){
 		$data = $this->input->post();
 		$result = $this->user->validate_register($data);
-		//check if registration input is valid and clean
-		if ($result == "valid") {
-			//check if this is the first registration ever
-			if (!$this->user->get_all()) {
-				$data["user_level"] = 9;
-			}
-			else 	$data["user_level"] = 0;
 
+		if ($result == "valid") {
 			$this->user->add($data);
+			$this->set_userinfo();
 			$success[] = 'Registration successful.';
       $this->session->set_flashdata('success', $success);
 		}
@@ -24,14 +19,17 @@ class Users extends CI_Controller {
 			$errors = [validation_errors()];
 			$this->session->set_flashdata('errors', $errors);
 		}
+
 		if (!$this->session->userdata("user_id")) {
-			redirect('dashboard/register');
+			// !!!!! change to external index
+			redirect('/');
 		}
-		else redirect("dashboard/add");
+		else redirect("/main/home"); // !!!!! change to internal home
 	}
 	public function login(){
 		$result = $this->user->validate_login($this->input->post());
 		if ($result == "valid") {
+			$this->set_userinfo();
 			redirect("/dashboard/home");
 		}
 		else {
@@ -44,9 +42,23 @@ class Users extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect("/");
 	}
+	private function set_userinfo(){
+		$userinfo = $this->user->get_user_by_email($data["email"]);
+		$this->session->set_userdata("user_id", $userinfo["user_id"]);
+		$this->session->set_userdata("first_name", $userinfo["first_name"]);
+		$this->session->set_userdata("last_name", $userinfo["last_name"]);
+		$this->session->set_userdata("email", $userinfo["email"]);
+		$this->session->set_userdata("created_at", $userinfo["created_at"]);
+	}
+
+
+
+
+	
+	
 	public function delete(){
 		if ($this->session->userdata("user_id")) {
-			$temp = $this->user->get_user($this->session->userdata("user_id"));
+			$temp = $this->user->get_user_by_id($this->session->userdata("user_id"));
 			if ($temp["user_level"] == 9) {
 				$result = $this->user->delete($this->input->post("delete"));
 				if ($result) {
@@ -63,7 +75,7 @@ class Users extends CI_Controller {
 	}
 	public function edit_info($target_id){
 		if ($this->session->userdata("user_id")) {
-			$temp = $this->user->get_user($this->session->userdata("user_id"));
+			$temp = $this->user->get_user_by_id($this->session->userdata("user_id"));
 			$data = $this->input->post();
 			$data["user_id"] = $target_id;
 			if ($temp["user_level"] == 9) {
@@ -91,7 +103,7 @@ class Users extends CI_Controller {
 	}
 	public function change_password($target_id){
 		if ($this->session->userdata("user_id")) {
-			$temp = $this->user->get_user($this->session->userdata("user_id"));
+			$temp = $this->user->get_user_by_id($this->session->userdata("user_id"));
 			$data = $this->input->post();
 			$data["user_id"] = $target_id;
 			if ($this->user->validate_change_password($data) == "valid") {
