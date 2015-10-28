@@ -10,7 +10,7 @@ class Users extends CI_Controller {
 		$result = $this->user->validate_register($data);
 
 		if ($result == "valid") {
-			$this->user->add($data);
+			$this->user->add_user($data);
 			$this->set_userinfo();
 			$success[] = 'Registration successful.';
       $this->session->set_flashdata('success', $success);
@@ -50,10 +50,28 @@ class Users extends CI_Controller {
 		$this->session->set_userdata("email", $userinfo["email"]);
 		$this->session->set_userdata("created_at", $userinfo["created_at"]);
 	}
+	public function add_friend($me, $them){
+		$this->user->create_request($me, $them);
+	}
+	public function remove_friend($me, $them){
+		$this->user->remove_friendship($me, $them);
+	}
+	public function cancel_friend_req($me, $them){
+		$this->user->delete_request($me, $them);
+	}
+	public function accept_friend_req($them, $me){
+		$this->user->create_friendship($me, $them);
+		$this->user->delete_request($them, $me);
+	}
+	public function reject_friend_req($them, $me){
+		$this->user->delete_request($them, $me);
+	}
 
-
-
-
+	//add friend requests table
+	//change user settings
+	//add billing info
+	//add shipping info
+	//edit those
 	
 	
 	public function delete(){
