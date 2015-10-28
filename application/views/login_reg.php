@@ -24,26 +24,30 @@
 			    <form class="col m5 s12">
 			    <h4 class="form_label">Register</h4>
 			      <div class="row">
-			        <div class="input-field col s12">
-			          <input id="username" type="email" class="validate">
-			          <label for="username">Username</label>
+			        <div class="input-field col s6">
+			          <input id="first_name" type="text" name="first_name" class="validate">
+			          <label for="first_name">First Name</label>
+			        </div>
+			        <div class="input-field col s6">
+			          <input id="last_name" type="text" name="last_name" class="validate">
+			          <label for="last_name">Last Name</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="email" type="email" class="validate">
+			          <input id="email" type="email" name="email" class="validate">
 			          <label for="email">Email</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="password" type="password" class="validate">
+			          <input id="password" type="password" name="password" class="validate">
 			          <label for="password">Password</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="confirm_password" type="password" class="validate">
+			          <input id="confirm_password" type="password" name="confirm_password" class="validate">
 			          <label for="confirm_password">Confirm Password</label>
 			        </div>
 			      </div>
@@ -54,13 +58,13 @@
 			      <h4 class="form_label">Reset Password</h4>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="login_username" type="email" class="validate">
-			          <label for="login_username">Username</label>
+			          <input id="login_email" type="email" name="email" class="validate">
+			          <label for="login_email">Email</label>
 			        </div>
 			      </div>
 			      <div class="row">
 			        <div class="input-field col s12">
-			          <input id="login_password" type="password" class="validate">
+			          <input id="login_password" type="password" name="password" class="validate">
 			          <label for="login_password">Password</label>
 			        </div>
 			      </div>
