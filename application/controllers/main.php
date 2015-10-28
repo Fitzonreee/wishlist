@@ -12,7 +12,7 @@ class Main extends CI_Controller {
 		$this->load->view('login_reg');
 	}
 	public function home(){
-		$this->load->view('product');
+		$this->load->view('friend_list');
 	}
 	public function preferences(){
 		$this->load->view('preferences');
