@@ -7,6 +7,16 @@ body {
 	background-image: url("../imgs/greyzz_@2X.png") !important;
 }
 
+.form_label {
+	font-family: "Raleway", serif;
+	font-weight: 100;
+	margin: 30px 0;
+	border: 1px solid black;
+	padding: 15px;
+	text-align: center;
+	background-color: white;
+}
+
 /*************************
 		 NAV
 *************************/
@@ -32,25 +42,6 @@ body {
 	font-weight: 100;
 	letter-spacing: 3px;
 }
-
-.form_label {
-	font-family: "Raleway", serif;
-	font-weight: 100;
-	margin: 30px 0;
-	border: 1px solid black;
-	padding: 15px;
-	text-align: center;
-	background-color: white;
-}
-
-.page-footer {
-	background-color: #50514F !important;
-}
-
-
-/*************************
-	   Login / Reg
-*************************/
 
 /*************************
 	   Preferences
@@ -95,6 +86,7 @@ body {
 .padding {
 	padding-top: 10px;
 }
+
 /*************************
       Form inputs
 *************************/
@@ -148,19 +140,7 @@ body {
 }
 
 
-/*************************
-  Sticky Footer - broken
-*************************/
 
- body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
-
-  main {
-    flex: 1 0 auto;
-  }
 
 
 

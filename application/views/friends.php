@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,6 +25,9 @@
 		      </ul>
 		    </div>
 		</nav>
+<?php
+@include('partials/nav_logged_in.php');
+?>
 		<div class="container">
 			<div class="row"  id="collection_top">
 				<div class="col m6 offset-m3">

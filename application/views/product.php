@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -24,6 +25,11 @@
 		      </ul>
 		    </div>
 		</nav>
+
+<?php
+@include('partials/nav_logged_in.php');
+?>
+
 		<div class="container">
 		  <div class="row">
 	        <div class="col s12 m8 offset-m2">
