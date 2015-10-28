@@ -85,18 +85,18 @@ class User extends CI_Model {
 
 	/*Friend Requests*/
 	public function get_req_status($me, $them){
-		$query = "SELECT * FROM friend_requests WHERE (recipient = ? AND requestor = ?) OR (requestor = ? AND recipient = ?)";
+		$query = "SELECT * FROM friend_requests WHERE (recipient_id = ? AND requestor_id = ?) OR (requestor_id = ? AND recipient_id = ?)";
 		$values = [$me, $them, $them, $me];
 		return $this->db->query($query, $values)->row_array();
 	}
 	public function create_request($me, $them){
-		$query = "INSERT INTO friend_requests (recipient, requestor) VALUES (?,?)";
+		$query = "INSERT INTO friend_requests (recipient_id, requestor_id) VALUES (?,?)";
 		$values = [$me, $them];
 		return $this->db->query($query, $values);
 	}
 	public function delete_request($id1, $id2){
 		$values = [$id1, $id2];
-		$query = "DELETE FROM friend_requests WHERE requestor = ? AND recipient = ?";
+		$query = "DELETE FROM friend_requests WHERE requestor_id = ? AND recipient_id = ?";
 		$this->db->query($query, $values);
 	}
 
