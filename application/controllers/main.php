@@ -12,7 +12,7 @@ class Main extends CI_Controller {
 		$this->load->view('product');
 	}
 	public function home(){
-		$this->load->view('friend_list');
+		$this->load->view('cart');
 	}
 	public function friends(){
 		$data['friends'] = $this->user->get_friends($this->session->userdata('id'));
