@@ -4,7 +4,7 @@
 		<div class="container">
 			<div class="row">
 			 	<!-- REGISTRATION -->
-			    <form class="col m5 s12">
+			    <form class="col m5 s12" action="/users/register" method="post">
 			    <h4 class="form_label">Register</h4>
 			      <div class="row">
 			        <div class="input-field col s6">
@@ -36,7 +36,7 @@
 			      </div>
 				  <div class="row">
 					<div>
-					 	<a class="waves-effect waves-light btn amber accent-2 black-text right">Register</a>
+					 	<button class="waves-effect waves-light btn amber accent-2 black-text right">Register</button>
 					</div>
 				  </div>
 			    </form>
@@ -44,7 +44,7 @@
 
 			    <!-- LOGIN -->
 			    <!-- needs responsive work -->
-			    <form class="col m5 offset-m2 s12">
+			    <form class="col m5 offset-m2 s12" action="/users/login" method="post">
 			      <h4 class="form_label">Login</h4>
 			      <div class="row">
 			        <div class="input-field col s12">
@@ -59,10 +59,8 @@
 			        </div>
 			      </div>
 			      <div class="row">
-					<div>
-					 	<a class="waves-effect waves-light btn amber accent-2 black-text right">Login</a>
-					</div>
-				  </div>
+						 	<button class="waves-effect waves-light btn amber accent-2 black-text right">Login</button>
+					  </div>
 			    </form>
 			</div> <!-- end of row -->
 		</div> <!-- end of container -->

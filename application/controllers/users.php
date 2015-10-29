@@ -11,7 +11,7 @@ class Users extends CI_Controller {
 
 		if ($result == "valid") {
 			$this->user->add_user($data);
-			$this->set_userinfo();
+			$this->set_userinfo($data["email"]);
 			$success[] = 'Registration successful.';
       $this->session->set_flashdata('success', $success);
 		}
@@ -29,7 +29,7 @@ class Users extends CI_Controller {
 	public function login(){
 		$result = $this->user->validate_login($this->input->post());
 		if ($result == "valid") {
-			$this->set_userinfo();
+			$this->set_userinfo($this->input->post("email"));
 			redirect("/main/home");
 		}
 		else {
@@ -42,9 +42,9 @@ class Users extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect("/");
 	}
-	private function set_userinfo(){
-		$userinfo = $this->user->get_user_by_email($data["email"]);
-		$this->session->set_userdata("user_id", $userinfo["user_id"]);
+	private function set_userinfo($email){
+		$userinfo = $this->user->get_user_by_email($email);
+		$this->session->set_userdata("user_id", $userinfo["id"]);
 		$this->session->set_userdata("first_name", $userinfo["first_name"]);
 		$this->session->set_userdata("last_name", $userinfo["last_name"]);
 		$this->session->set_userdata("email", $userinfo["email"]);

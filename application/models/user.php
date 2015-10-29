@@ -20,7 +20,7 @@ class User extends CI_Model {
     }
 	}
 	public function add_user($info){
-		$query = "INSERT INTO users (first_name, last_name, email, password, salt, created_at, updated_at) VALUES (?,?,?,?,?,?,NOW(),NOW())";
+		$query = "INSERT INTO users (first_name, last_name, email, password, salt, created_at, updated_at) VALUES (?,?,?,?,?,NOW(),NOW())";
 		$encryption = $this->encrypt_password($info["password"]);
 		$values = [$info['first_name'], $info["last_name"], $info["email"], $encryption['password'], $encryption['salt']];
 
@@ -147,21 +147,21 @@ class User extends CI_Model {
 
 	/*Generic Getters*/
 	public function get_all(){
-		$query = "SELECT user_id, concat(first_name, ' ', last_name) AS name, email, date_created, user_level FROM users";
+		$query = "SELECT id, concat(first_name, ' ', last_name) AS name, email, date_created, user_level FROM users";
 		return $this->db->query($query)->result_array();
 	}
 	public function get_user_by_email($email){
-		$query = "SELECT user_id, first_name, last_name, email, created_at FROM users WHERE email = ?";
+		$query = "SELECT id, first_name, last_name, email, created_at FROM users WHERE email = ?";
 		return $this->db->query($query, $email)->row_array();
 	}
 	public function get_user_by_id($id){
-		$query = "SELECT user_id, first_name, last_name, email FROM users WHERE user_id = ?";
+		$query = "SELECT id, first_name, last_name, email FROM users WHERE id = ?";
 		return $this->db->query($query, $id)->row_array();
 	}
 
 	/*Admin Functions*/
 	public function update_user_admin($info){
-		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, user_level = ?, description = ?, date_updated = NOW() WHERE user_id = ?";
+		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, user_level = ?, description = ?, date_updated = NOW() WHERE id = ?";
 		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_level"], $info["description"], $info["user_id"]];
 
 		return $this->db->query($query, $values);
