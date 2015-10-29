@@ -13,13 +13,10 @@ class Main extends CI_Controller {
 	}
 	public function home(){
 		$this->load->view('friend_list');
-
 	}
-	
 	public function friends(){
 		$data['friends'] = $this->user->get_friends($this->session->userdata('id'));
 		$this->load->view('friends', $data);
-
 	}
 	public function preferences(){
 		$this->load->view('preferences');
@@ -28,9 +25,19 @@ class Main extends CI_Controller {
 		var_dump($this->user->get_friends(1));
 		var_dump($this->session->userdata('id'));
 	}
-	
+	public function friend_list(){
+		$this->load->view('friend_list');
+	}
+	public function my_list(){
+		$this->load->view('my_list');
+	}
+	public function product(){
+		$this->load->view('product');
+	}
+	public function product_info(){
+		$this->load->view('product_info');
+	}
 	public function settings(){
 		$this->load->view('settings');
 	}
-	
 }
