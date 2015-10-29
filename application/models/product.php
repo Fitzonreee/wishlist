@@ -22,17 +22,9 @@ class Product extends CI_Model {
 	}
 
 	public function get_all_based_on_preferences(){
-		$query = "SELECT * FROM products JOIN preferences on products.category_id = preferences.category_id WHERE user_id = ?";
-		$values = [$this->session->userdata('id')];
+		$query = "SELECT * FROM products JOIN preferences on products.category_id = preferences.category_id JOIN dislikes ON products.id = dislikes.product_id WHERE preferences.user_id = ? AND dislikes.user_id != ?";
+		$values = [$this->session->userdata('id'), $this->session->userdata('id')];
 		return $this->db->query($query, $values)->result_array();
 	}
 
-	public function removes_products_on_wishlist($data){
-		foreach($data as $product){
-			if(!($this->wishlist->get_item($product['id']))){
-				$not_on_wishlist[] = $this->product->get_product($product['id']);
-			}
-		}
-		return $not_on_wishlist;
-	}
 }

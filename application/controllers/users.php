@@ -20,17 +20,17 @@ class Users extends CI_Controller {
 			$this->session->set_flashdata('errors', $errors);
 		}
 
-		if (!$this->session->userdata("user_id")) {
+		if (!$this->session->userdata("id")) {
 			// !!!!! change to external index
 			redirect('/');
 		}
-		else redirect("/main/home"); // !!!!! change to internal home
+		else redirect("/main"); // !!!!! change to internal home
 	}
 	public function login(){
 		$result = $this->user->validate_login($this->input->post());
 		if ($result == "valid") {
 			$this->set_userinfo($this->input->post("email"));
-			redirect("/main/home");
+			redirect("/main");
 		}
 		else {
 			$errors = $result;
@@ -44,22 +44,20 @@ class Users extends CI_Controller {
 	}
 	private function set_userinfo($email){
 		$userinfo = $this->user->get_user_by_email($email);
-		$this->session->set_userdata("user_id", $userinfo["id"]);
+		$this->session->set_userdata("id", $userinfo["id"]);
 		$this->session->set_userdata("first_name", $userinfo["first_name"]);
 		$this->session->set_userdata("last_name", $userinfo["last_name"]);
 		$this->session->set_userdata("email", $userinfo["email"]);
-		$this->session->set_userdata("created_at", $userinfo["created_at"]);
 	}
 	private function set_userinfo_by_id($id){
 		$userinfo = $this->user->get_user_by_id($id);
-		$this->session->set_userdata("user_id", $userinfo["id"]);
+		$this->session->set_userdata("id", $userinfo["id"]);
 		$this->session->set_userdata("first_name", $userinfo["first_name"]);
 		$this->session->set_userdata("last_name", $userinfo["last_name"]);
 		$this->session->set_userdata("email", $userinfo["email"]);
-		$this->session->set_userdata("created_at", $userinfo["created_at"]);
 	}
 	public function add_friend($me, $them){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
 			$result = $this->user->create_request($me, $them);
 
 			if ($result) {
@@ -75,7 +73,7 @@ class Users extends CI_Controller {
 		redirect("/");
 	}
 	public function remove_friend($me, $them){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
 			$result = $this->user->remove_friendship($me, $them);
 
 			if ($result) {
@@ -90,7 +88,7 @@ class Users extends CI_Controller {
 		redirect("/");
 	}
 	public function cancel_friend_req($me, $them){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
 			$result = $this->user->delete_request($me, $them);
 
 			if ($result) {
@@ -106,7 +104,7 @@ class Users extends CI_Controller {
 		redirect("/");
 	}
 	public function accept_friend_req($them, $me){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
 			$result = $this->user->create_friendship($me, $them);
 
 			if ($result) {
@@ -130,7 +128,7 @@ class Users extends CI_Controller {
 		redirect("/");
 	}
 	public function reject_friend_req($them, $me){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
 			$result = $this->user->delete_request($them, $me);
 
 			if ($result) {
@@ -146,14 +144,14 @@ class Users extends CI_Controller {
 		redirect("/");
 	}
 	public function edit_info($target_id){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $target_id) {
 			$data = $this->input->post();
 			// var_dump($data);
 			// die();
-			$data["user_id"] = $target_id; //!!!!!used for admin deletion, if we decide to
+			$data["id"] = $target_id; //!!!!!used for admin deletion, if we decide to
 			if ($this->user->validate_update($data) == "valid") {
 				$result = $this->user->update_user($data);
-				$this->set_userinfo_by_id($this->session->userdata("user_id"));
+				$this->set_userinfo_by_id($this->session->userdata("id"));
 			}
 
 			if ($result) {
@@ -169,9 +167,9 @@ class Users extends CI_Controller {
 		redirect("/");
 	}
 	public function change_password($target_id){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $target_id) {
 			$data = $this->input->post();
-			$data["user_id"] = $target_id; //!!!!!used for admin deletion, if we decide to
+			$data["id"] = $target_id; //!!!!!used for admin deletion, if we decide to
 			if ($this->user->validate_change_password($data) == "valid") {
 				$result = $this->user->update_password($data);
 			}
@@ -189,7 +187,7 @@ class Users extends CI_Controller {
 		redirect("/");
 	}
 	public function delete($target_id){
-		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $target_id) {
 			$result = $this->user->delete($target_id);
 			if ($result) {
 				$this->session->sess_destroy();

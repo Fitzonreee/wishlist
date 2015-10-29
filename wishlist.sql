@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2015 at 11:06 AM
+-- Generation Time: Oct 29, 2015 at 12:06 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `wishlist`
 --
+CREATE DATABASE IF NOT EXISTS `wishlist` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `wishlist`;
 
 -- --------------------------------------------------------
 
@@ -217,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `salt`, `updated_at`, `created_at`) VALUES
 (1, 'mr', 'god', 'god@gmail.com', '1234', '', '2015-10-27 18:56:54', NULL),
-(2, 'Ryan', 'Tang', 'ryantang333@gmail.com', 'f0b0548ee12b9997d3cce5e090e1f336', 'fd049276e0d87aa6661855da28add1b7ea98e91ede19', '2015-10-29 10:55:01', '2015-10-29 10:55:01'),
+(2, 'a', 'Tang', 'ryantang333@gmail.com', 'f0b0548ee12b9997d3cce5e090e1f336', 'fd049276e0d87aa6661855da28add1b7ea98e91ede19', '2015-10-29 11:48:07', '2015-10-29 10:55:01'),
 (4, 'e', 'e', 'e@1.com', 'cd956768e03723a204738d636485b230', 'e21357666a066356d7ff83df556bd46a24f48388828f', '2015-10-29 11:00:56', '2015-10-29 11:00:56'),
 (5, 'a', 'a', 'a@1.com', 'eb21a66f3938478e74b3ef14340872ae', '5598fed57248910094295ddb429db507d15505b7c1d5', '2015-10-29 11:02:00', '2015-10-29 11:02:00');
 

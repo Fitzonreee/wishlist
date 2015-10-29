@@ -16,14 +16,18 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<h1>Item already added!</h1>
-		<form action = '/wishlists/my_list'>
-			<button type="submit" class="btn btn-success">My Wishlist</button>
-		</form>
-
-		<form action = '/carts/viewcart'>
-			<button type="submit" class="btn btn-success">My Cart</button>
-		</form>
-
+<?php
+@include('partials/nav_logged_in.php');
+?>
+	    <div class="container">
+		  <div class="row">
+	        <div class="col s12 m8 offset-m2">
+	        	<h4 class="form_label">Wait a tick!</h4>
+	          	<h5 class="center-align">You already added this item to your list.</h5>
+	          	<h6 class="center-align"><a href="#" class="waves-effect waves-light btn-large amber accent-2 black-text" >Back</a></h6>
+	        </div>
+	      </div>
+		</div> <!-- end of container -->
 	</body>
 </html>
+

@@ -3,16 +3,13 @@
 class Main extends CI_Controller {
 	public function __construct(){
 		parent:: __construct();
-		if (!$this->session->userdata("user_id")) {
+		if (!$this->session->userdata("id")) {
 			redirect("/");
 		}
-		//$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 	}
 	public function index(){
-		$this->load->view('product');
-	}
-	public function home(){
-		$this->load->view('cart');
+		redirect('products/display_products/true');
 	}
 	public function friends(){
 		$data['friends'] = $this->user->get_friends($this->session->userdata('id'));

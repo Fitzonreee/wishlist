@@ -17,7 +17,7 @@
 		<div class="container">
 			<div class="row">
 			 	<!-- CHANGE INFORMATION -->
-			    <form class="col m5 s12" action="/users/edit_info/<?=$this->session->userdata('user_id')?>" method="post">
+			    <form class="col m5 s12" action="/users/edit_info/<?=$this->session->userdata('id')?>" method="post">
 			    <h4 class="form_label">Change Information</h4>
 			      <div class="row">
 			        <div class="input-field col s6">
@@ -42,7 +42,7 @@
 				  </div>
 			    </form>
 			    <!-- RESET PASSWORD -->
-			    <form class="col m5 offset-m2 s12" action="/users/change_password/<?=$this->session->userdata('user_id')?>" method="post">
+			    <form class="col m5 offset-m2 s12" action="/users/change_password/<?=$this->session->userdata('id')?>" method="post">
 			      <h4 class="form_label">Reset Password</h4>
 			      <div class="row">
 			        <div class="input-field col s12">

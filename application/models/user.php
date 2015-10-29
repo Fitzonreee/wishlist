@@ -103,7 +103,7 @@ class User extends CI_Model {
 	/*User Settings*/
 	public function update_user($info){
 		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, updated_at = NOW() WHERE id = ?";
-		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_id"]];
+		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["id"]];
 
 		return $this->db->query($query, $values);
 	}
@@ -120,12 +120,12 @@ class User extends CI_Model {
     }
 	}
 	public function update_password($info){
-		$q = $this->db->query("SELECT salt FROM users WHERE id = ?", $info["user_id"])->row_array();
+		$q = $this->db->query("SELECT salt FROM users WHERE id = ?", $info["id"])->row_array();
 		$salt = $q["salt"];
 		$encryptpass = md5($info["password"] . '' . $salt);
 
 		$query = "UPDATE users SET password = ?, updated_at = NOW() WHERE id = ?";
-		$values = [$encryptpass, $info["user_id"]];
+		$values = [$encryptpass, $info["id"]];
 
 		return $this->db->query($query, $values);
 	}
@@ -159,25 +159,25 @@ class User extends CI_Model {
 		return $this->db->query($query, $id)->row_array();
 	}
 
-	/*Admin Functions*/
-	public function update_user_admin($info){
-		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, user_level = ?, description = ?, date_updated = NOW() WHERE id = ?";
-		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_level"], $info["description"], $info["user_id"]];
+	// /*Admin Functions*/
+	// public function update_user_admin($info){
+	// 	$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, user_level = ?, description = ?, date_updated = NOW() WHERE id = ?";
+	// 	$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_level"], $info["description"], $info["user_id"]];
 
-		return $this->db->query($query, $values);
-	}
-	public function validate_update_admin($data){
-    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|valid_email|');
-    $this->form_validation->set_rules('first_name', 'First Name', 'real_escape_string|xss_clean|trim');
-    $this->form_validation->set_rules('last_name', 'Last Name', 'real_escape_string|xss_clean|trim');
-    $this->form_validation->set_rules('user_level', 'User Level', 'real_escape_string|xss_clean|trim');
-    $this->form_validation->set_rules('description', 'Description', 'real_escape_string|xss_clean|trim');
+	// 	return $this->db->query($query, $values);
+	// }
+	// public function validate_update_admin($data){
+ //    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|valid_email|');
+ //    $this->form_validation->set_rules('first_name', 'First Name', 'real_escape_string|xss_clean|trim');
+ //    $this->form_validation->set_rules('last_name', 'Last Name', 'real_escape_string|xss_clean|trim');
+ //    $this->form_validation->set_rules('user_level', 'User Level', 'real_escape_string|xss_clean|trim');
+ //    $this->form_validation->set_rules('description', 'Description', 'real_escape_string|xss_clean|trim');
 
-    if($this->form_validation->run()) {
-      return "valid";
-    }
-    else {
-      return array(validation_errors());
-    }
-	}
+ //    if($this->form_validation->run()) {
+ //      return "valid";
+ //    }
+ //    else {
+ //      return array(validation_errors());
+ //    }
+	// }
 }

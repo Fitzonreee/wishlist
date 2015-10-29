@@ -30,9 +30,12 @@ $rand = rand(0, count($products) - 1);
 	              <span class="card-title black-text"><?= $products[$rand]['name'] ?></span>
 	              <p><?= $products[$rand]['description'] ?></p>
 	            </div>
-	            <div class="card-action grey lighten-1">
-	              <a href="products/display_products"><i class="medium material-icons grey darken-3">add</i></a>
-	              <a href="/products/display_products/<?= $rand ?>"><i class="medium material-icons grey darken-3 right">skip_next</i></a>
+	              <div class="card-action grey lighten-1">
+	               <button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text" type="submit" name="action">Add to My List
+				    <i class="material-icons right">add</i>
+				  </button>
+	       		  <button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text right" type="submit" name="action">Next
+				  </button>
 	            </div>
 	          </div>
 	        </div>
