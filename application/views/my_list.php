@@ -26,7 +26,7 @@
 	              <img src="<?= $item['image_url']?>" width= 100%>
 	            </div>
 	            <div class="card-action">
-            	  <a href="/products/info/<?= $item['product_id'] ?>"><span class="black-text title"><?= $item['name'] ?></span></a>
+            	  <a href="/main/info/<?= $item['product_id'] ?>"><span class="black-text title"><?= $item['name'] ?></span></a>
 	              <a href="/wishlists/delete/<?= $item['product_id'] ?>"><i class="material-icons amber-text accent-2-text right">delete</i></a>
 	            </div>
 	          </div>

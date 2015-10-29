@@ -20,4 +20,19 @@ class Product extends CI_Model {
 		$query = "DELETE FROM users WHERE user_id = ?";
 		return $this->db->query($query, $id);
 	}
+
+	public function get_all_based_on_preferences(){
+		$query = "SELECT * FROM products JOIN preferences on products.category_id = preferences.category_id WHERE user_id = ?";
+		$values = [$this->session->userdata('id')];
+		return $this->db->query($query, $values)->result_array();
+	}
+
+	public function removes_products_on_wishlist($data){
+		foreach($data as $product){
+			if(!($this->wishlist->get_item($product['id']))){
+				$not_on_wishlist[] = $this->product->get_product($product['id']);
+			}
+		}
+		return $not_on_wishlist;
+	}
 }

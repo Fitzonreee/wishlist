@@ -21,10 +21,6 @@ class Main extends CI_Controller {
 	public function preferences(){
 		$this->load->view('preferences');
 	}
-	public function get_all_friends(){
-		var_dump($this->user->get_friends(1));
-		var_dump($this->session->userdata('id'));
-	}
 	public function friend_list(){
 		$this->load->view('friend_list');
 	}

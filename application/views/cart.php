@@ -25,7 +25,6 @@
 					      <tr>
 					          <th data-field="id">Item</th>
 							  <th data-field="recipient">Recipient</th>
-					          <th data-field="quantity">Quantity</th>
 					          <th data-field="price">Price</th>
 					          <th data-field="remove">Remove</th>
 					      </tr>

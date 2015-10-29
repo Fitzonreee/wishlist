@@ -2,7 +2,7 @@
 		<nav>
 		    <div class="nav-wrapper">
 		      <!-- needs responsive work -->
-		      <a href="/main" class="brand-logo center" id="logo"><i class="material-icons left hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
+		      <a href="/products/display_products/true" class="brand-logo center" id="logo"><i class="material-icons left hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
 		      <ul id="nav-mobile" class="left hide-on-med-and-down">
 		        <li><a href="/wishlists/my_list">My List</a></li>
 		        <li><a href="/main/friends">Friends</a></li>

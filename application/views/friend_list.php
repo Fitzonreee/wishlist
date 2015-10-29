@@ -15,8 +15,8 @@
 @include('partials/nav_logged_in.php');
 ?>
 		<div class="container">
-	      <div class="row">
-<!-- 	     <h4 class="form_label"><?= $data[0]['first_name']?>'s Wishlist</h4> -->
+  			<div class="row">
+			<h4 class="form_label"><?= $data[0]['first_name']?>'s Wishlist</h4>
 	      <?
 	      	foreach($data as $item){ ?>
 	      	<div class="col s12 m3">
@@ -25,7 +25,7 @@
 	              <img src="<?= $item['image_url'] ?>" width= 100%>
 	            </div>
 	            <div class="card-action padding_bottom">
-	              <a href="/products/info/<?= $item['product_id'] ?>"><span class="black-text title"><?= $item['name'] ?></span></a>
+	              <a href="/main/info/<?= $item['product_id'] ?>"><span class="black-text title"><?= $item['name'] ?></span></a>
 	              <a href="/wishlists/add_my_list/<?= $item['product_id'] ?>"><i class="material-icons amber-text accent-2-text right">add</i></a>
 	              <!-- CHECKOUT BUTTON -->
 					<form action = "/carts/add" method = "post">
