@@ -40,4 +40,8 @@ class Main extends CI_Controller {
 	public function settings(){
 		$this->load->view('settings');
 	}
+	public function info($id){
+		$item['info'] = $this->product->get_product($id);
+		$this->load->view('product_info', $item);
+	}
 }
