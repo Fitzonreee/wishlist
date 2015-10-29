@@ -139,22 +139,31 @@ body {
  color: #000;
 }
 
+/*************************
+	  Table - CART
+*************************/
 
+table {
+	background-color: white;
+	padding: 15px;
+}
 
+table td, th {
+	padding-left: 40px
+}
 
+.collection-item {
+	padding-left: 40px !important;
+}
 
+#total {
+	width: 40px;
+	padding-right: 180px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.remove {
+	margin-left: 20px;
+}
 
 
 

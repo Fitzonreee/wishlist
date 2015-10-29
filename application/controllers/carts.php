@@ -2,31 +2,33 @@
 
 class Carts extends CI_Controller {
 
-	public function index(){
-		$newitem = $this->input->get();
-		if($this->Cart->get_item($newitem['id'])){
+	public function add(){
+		$product_id = $this->input->post('product_id');
+		$recipient_id = $this->input->post('recipient_id');
+		if($this->cart->get_item($product_id, $recipient_id)){
+			// var_dump($this->cart->get_item($product_id, $recipient_id));
+			// die();
 			$this->load->view('errors');
 		}
 		else{
-			$this->Cart->add($newitem);
+			// die();
+			$this->cart->add($product_id, $recipient_id);
 			redirect('/carts/viewcart');
 		}
 
 		
 	}
 	public function viewcart(){
-		$data['items'] = $this->Cart->get_all();
-		$this->load->view('temp_cart_view', $data);
+		$data['items'] = $this->cart->get_all();
+
+		$this->load->view('cart', $data);
 	}
 
 
-	public function remove(){
+	public function remove($product_id, $recipient_id){
 
-		$olditem = $this->input->get();
-		$olditemid = intval($olditem['id']);
-		$this->Cart->delete($olditem['id']);
+		$this->cart->delete($product_id, $recipient_id);
 		redirect('/carts/viewcart');
 	}
 
-	
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 	<head>
 		<title> </title>
@@ -15,9 +16,14 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	</head>
 	<body>
-		<h1>Item already in added!</h1>
+		<h1>Item already added!</h1>
 		<form action = '/wishlists/my_list'>
-			<button type="submit" class="btn btn-success">Back to My Wishlist</button>
+			<button type="submit" class="btn btn-success">My Wishlist</button>
 		</form>
+
+		<form action = '/carts/viewcart'>
+			<button type="submit" class="btn btn-success">My Cart</button>
+		</form>
+
 	</body>
 </html>

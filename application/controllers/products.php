@@ -16,10 +16,9 @@ class Products extends CI_Controller {
 		echo "hello add";
 	}
 
-	public function info(){
-		$item = $this->input->get('id');
-		$item2['info'] = $this->Product->get_product($item);
-		$this->load->view('product_info', $item2);
+	public function info($id){
+		$item['info'] = $this->product->get_product($id);
+		$this->load->view('product_info', $item);
 	}
 
 }

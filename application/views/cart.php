@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <html>
 	<head>
-		<title>Wishlist - Product</title>
+		<title>Wishlist</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 		<!-- Compiled and minified CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
@@ -9,21 +8,67 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href='https://fonts.googleapis.com/css?family=Raleway:200,100' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/main.css'); ?>">
 	</head>
 	<body>
-		<nav>
-		    <div class="nav-wrapper">
-		      <!-- needs responsive work -->
-		      <a href="/main" class="brand-logo center" id="logo"><i class="material-icons left hide-on-med-and-down" id="list_view">view_list</i>Wishlist</a>
-		      <ul id="nav-mobile" class="left hide-on-med-and-down">
-		        <li><a href="/wishlists/my_list">My List</a></li>
-		        <li><a href="/main/friends">Friends</a></li>
-		        <li><a href="#">Settings</a></li>
-		        <li><a href="">My Cart</a></li>
-		      </ul>
-		    </div>
-		</nav>
+<?php
+@include('partials/nav_logged_in.php');
+?>
+		<div class="container">
+		  <div class="row">
+	        <div class="col s12 m8 offset-m2">
+	        <h4 class="form_label">Your Cart</h4>
+	        	<div class="row">
+    		      <table class="striped">
+				    <thead>
+				      <tr>
+				          <th data-field="id">Item</th>
+				          <th data-field="recipient">Recipient</th>
+				          <th data-field="price">Price</th>
+				          <th data-field="remove">Remove</th>
+				      </tr>
+				    </thead>
+					<tbody>
+						<?
+						foreach($items as $item){ 
+						?>
+							<tr>
+								<td><?= $item['name'] ?></td>
+								<td><?= $item['first_name']." ".$item['last_name'] ?></td>
+								<td>$ <?= number_format($item['price'],2,'.',',') ?></td>
+								<td><a href="/carts/remove/<?= $item['product_id'] ?>/<?= $item['recipient_id'] ?>"><i class="material-icons remove black-text">delete</i></a></td>
+							</tr>
+					<?
+					}
+					?>
+				     
+				    </tbody>
+				  </table>
+	        	</div> <!-- end of row -->
 
-		</body>
+	        	<div class="row">
+    		      <table class="striped">
+				    <thead>
+				      <tr>
+				          <th data-field="id">Total:</th>
+				      <?
+				      	$sum = 0;
+				        foreach($items as $item){
+				          	$sum += $item['price'];
+				      	}
+				      ?>
+				          <th data-field="price" id="total">$<?= number_format($sum,2,'.',',') ?></th>
+				      </tr>
+				    </thead>
+				  </table>
+	        	</div> <!-- end of row -->
+	        	<div class="row">
+					<div>
+					 	<a class="waves-effect waves-light btn amber accent-2 black-text center right">Checkout</a>
+					</div>
+				</div>
+	     	</div>
+	      </div>
+		</div> <!-- end of container -->
+	</body>
 </html>

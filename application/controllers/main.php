@@ -29,5 +29,8 @@ class Main extends CI_Controller {
 		var_dump($this->session->userdata('id'));
 	}
 	
+	public function settings(){
+		$this->load->view('settings');
+	}
 	
 }
