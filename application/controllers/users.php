@@ -143,6 +143,15 @@ class Users extends CI_Controller {
 		}
 		redirect("/");
 	}
+	public function find_user(){
+		$user = $this->user->get_user_by_email($this->input->post("email"));
+		$id = $user["id"];
+
+		if ($user) {
+			redirect("/wishlists/friends_list/$id");
+		}
+		redirect("/main/friends");
+	}
 	public function edit_info($target_id){
 		if ($this->session->userdata("id") && $this->session->userdata("id") == $target_id) {
 			$data = $this->input->post();

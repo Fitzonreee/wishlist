@@ -35,9 +35,9 @@
 			        </div>
 			      </div>
 				  <div class="row">
-					<div>
-					 	<button class="waves-effect waves-light btn amber accent-2 black-text right">Register</button>
-					</div>
+						<div>
+						 	<button class="waves-effect waves-light btn amber accent-2 black-text right">Register</button>
+						</div>
 				  </div>
 			    </form>
 			    

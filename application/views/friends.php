@@ -16,12 +16,19 @@
 ?>
 		<div class="container">
 			<div class="row"  id="collection_top">
-				<div class="col m6 offset-m3">
-					<div class="input-field grey lighten-4">
-			          <input class="grey lighten-4" id="search" type="search" required>
-			          <label for="search"><i class="material-icons">search</i></label>
-			        </div>
-				</div>
+				<form action="/users/find_user" method="post">
+					<div class="col m6 offset-m3">
+						<div class="input-field grey lighten-4">
+		          <input class="grey lighten-4" id="search" name="email" type="search" required>
+		          <label for="search"><i class="material-icons">search</i></label>
+		        </div>
+		        <div class="row">
+		        	<div class="col m12">
+							 	<button class="waves-effect waves-light btn amber accent-2 black-text right">Search</button>
+		        	</div>
+						</div>
+					</div>
+				</form>
 			</div>
 			<div class="row">
 				<div class="col m6 offset-m3">
