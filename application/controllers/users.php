@@ -192,8 +192,4 @@ class Users extends CI_Controller {
 		}
 		redirect("/");
 	}
-
-	//add billing info
-	//add shipping info
-	//edit those
 }
