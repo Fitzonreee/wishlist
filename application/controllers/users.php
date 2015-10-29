@@ -50,6 +50,14 @@ class Users extends CI_Controller {
 		$this->session->set_userdata("email", $userinfo["email"]);
 		$this->session->set_userdata("created_at", $userinfo["created_at"]);
 	}
+	private function set_userinfo_by_id($id){
+		$userinfo = $this->user->get_user_by_id($id);
+		$this->session->set_userdata("user_id", $userinfo["id"]);
+		$this->session->set_userdata("first_name", $userinfo["first_name"]);
+		$this->session->set_userdata("last_name", $userinfo["last_name"]);
+		$this->session->set_userdata("email", $userinfo["email"]);
+		$this->session->set_userdata("created_at", $userinfo["created_at"]);
+	}
 	public function add_friend($me, $them){
 		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $me) {
 			$result = $this->user->create_request($me, $them);
@@ -140,9 +148,12 @@ class Users extends CI_Controller {
 	public function edit_info($target_id){
 		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
 			$data = $this->input->post();
+			// var_dump($data);
+			// die();
 			$data["user_id"] = $target_id; //!!!!!used for admin deletion, if we decide to
 			if ($this->user->validate_update($data) == "valid") {
-				$result = $this->user->update_user_admin($data);
+				$result = $this->user->update_user($data);
+				$this->set_userinfo_by_id($this->session->userdata("user_id"));
 			}
 
 			if ($result) {
@@ -153,7 +164,7 @@ class Users extends CI_Controller {
 				$errors = [validation_errors()];
 				$this->session->set_flashdata('errors', $errors);
 			}
-			redirect("/main/edit/$target_id"); //!!!!!may have to change later
+			redirect("/main/settings"); //!!!!!may have to change later
 		}
 		redirect("/");
 	}
@@ -173,7 +184,7 @@ class Users extends CI_Controller {
 				$errors = [validation_errors()];
 				$this->session->set_flashdata('errors', $errors);
 			}
-			redirect("/main/edit/$target_id"); //!!!!!may have to change later
+			redirect("/main/settings"); //!!!!!may have to change later
 		}
 		redirect("/");
 	}

@@ -102,7 +102,7 @@ class User extends CI_Model {
 
 	/*User Settings*/
 	public function update_user($info){
-		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, date_updated = NOW() WHERE id = ?";
+		$query = "UPDATE users SET email = ?, first_name = ?, last_name = ?, updated_at = NOW() WHERE id = ?";
 		$values = [$info['email'], $info["first_name"], $info["last_name"], $info["user_id"]];
 
 		return $this->db->query($query, $values);
@@ -124,7 +124,7 @@ class User extends CI_Model {
 		$salt = $q["salt"];
 		$encryptpass = md5($info["password"] . '' . $salt);
 
-		$query = "UPDATE users SET password = ?, date_updated = NOW() WHERE id = ?";
+		$query = "UPDATE users SET password = ?, updated_at = NOW() WHERE id = ?";
 		$values = [$encryptpass, $info["user_id"]];
 
 		return $this->db->query($query, $values);
@@ -151,7 +151,7 @@ class User extends CI_Model {
 		return $this->db->query($query)->result_array();
 	}
 	public function get_user_by_email($email){
-		$query = "SELECT id, first_name, last_name, email, created_at FROM users WHERE email = ?";
+		$query = "SELECT id, first_name, last_name, email FROM users WHERE email = ?";
 		return $this->db->query($query, $email)->row_array();
 	}
 	public function get_user_by_id($id){
