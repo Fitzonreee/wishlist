@@ -11,7 +11,7 @@ class Users extends CI_Controller {
 
 		if ($result == "valid") {
 			$this->user->add_user($data);
-			$this->set_userinfo();
+			$this->set_userinfo($data["email"]);
 			$success[] = 'Registration successful.';
       $this->session->set_flashdata('success', $success);
 		}
@@ -29,7 +29,7 @@ class Users extends CI_Controller {
 	public function login(){
 		$result = $this->user->validate_login($this->input->post());
 		if ($result == "valid") {
-			$this->set_userinfo();
+			$this->set_userinfo($this->input->post("email"));
 			redirect("/main/home");
 		}
 		else {
@@ -42,9 +42,17 @@ class Users extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect("/");
 	}
-	private function set_userinfo(){
-		$userinfo = $this->user->get_user_by_email($data["email"]);
-		$this->session->set_userdata("user_id", $userinfo["user_id"]);
+	private function set_userinfo($email){
+		$userinfo = $this->user->get_user_by_email($email);
+		$this->session->set_userdata("user_id", $userinfo["id"]);
+		$this->session->set_userdata("first_name", $userinfo["first_name"]);
+		$this->session->set_userdata("last_name", $userinfo["last_name"]);
+		$this->session->set_userdata("email", $userinfo["email"]);
+		$this->session->set_userdata("created_at", $userinfo["created_at"]);
+	}
+	private function set_userinfo_by_id($id){
+		$userinfo = $this->user->get_user_by_id($id);
+		$this->session->set_userdata("user_id", $userinfo["id"]);
 		$this->session->set_userdata("first_name", $userinfo["first_name"]);
 		$this->session->set_userdata("last_name", $userinfo["last_name"]);
 		$this->session->set_userdata("email", $userinfo["email"]);
@@ -140,9 +148,12 @@ class Users extends CI_Controller {
 	public function edit_info($target_id){
 		if ($this->session->userdata("user_id") && $this->session->userdata("user_id") == $target_id) {
 			$data = $this->input->post();
+			// var_dump($data);
+			// die();
 			$data["user_id"] = $target_id; //!!!!!used for admin deletion, if we decide to
 			if ($this->user->validate_update($data) == "valid") {
-				$result = $this->user->update_user_admin($data);
+				$result = $this->user->update_user($data);
+				$this->set_userinfo_by_id($this->session->userdata("user_id"));
 			}
 
 			if ($result) {
@@ -153,7 +164,7 @@ class Users extends CI_Controller {
 				$errors = [validation_errors()];
 				$this->session->set_flashdata('errors', $errors);
 			}
-			redirect("/main/edit/$target_id"); //!!!!!may have to change later
+			redirect("/main/settings"); //!!!!!may have to change later
 		}
 		redirect("/");
 	}
@@ -173,7 +184,7 @@ class Users extends CI_Controller {
 				$errors = [validation_errors()];
 				$this->session->set_flashdata('errors', $errors);
 			}
-			redirect("/main/edit/$target_id"); //!!!!!may have to change later
+			redirect("/main/settings"); //!!!!!may have to change later
 		}
 		redirect("/");
 	}

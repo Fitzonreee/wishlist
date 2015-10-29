@@ -10,7 +10,7 @@
 		      </ul>
 		      <ul class="right hide-on-med-and-down">
 		        <li><a href="/carts/viewcart"><i class="material-icons">shopping_cart</i></a></li>
-		        <li><a href="#">Log Out</a></li>
+		        <li><a href="/users/logout">Log Out</a></li>
 		      </ul>
 		    </div>
 		</nav>
