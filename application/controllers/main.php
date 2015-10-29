@@ -13,6 +13,7 @@ class Main extends CI_Controller {
 	}
 	public function friends(){
 		$data['friends'] = $this->user->get_friends($this->session->userdata('id'));
+		$data["friend_requests"] = $this->user->get_requests($this->session->userdata('id'));
 		$this->load->view('friends', $data);
 	}
 	public function preferences(){

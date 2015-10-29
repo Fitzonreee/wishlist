@@ -15,7 +15,7 @@
 @include('partials/nav_logged_in.php');
 ?>
 		<div class="container">
-	      <div class="row">
+      <div class="row">
 	      <h4 class="form_label">Your Wishlist</h4>
 	      <?
 	      	foreach($items as $item){ 

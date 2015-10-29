@@ -69,7 +69,7 @@ class User extends CI_Model {
 		return $this->db->query($query, $this->session->userdata('id'))->result_array();
 	}
 	public function create_friendship($user_id, $friend_id){
-		$query = "INSERT INTO friendships (user_id, friend_id) VALUES (?, ?), (?, ?);";
+		$query = "INSERT INTO friendships (user_id, friend_id, created_at) VALUES (?, ?, NOW()), (?, ?, NOW());";
 		$values = [$user_id, $friend_id, $friend_id, $user_id];
 		return $this->db->query($query, $values);
 	}
@@ -81,15 +81,24 @@ class User extends CI_Model {
 		$this->db->query("DELETE FROM friendships WHERE friendships.user_id = ? AND friendships.friend_id=?;", $values);
 		$this->db->trans_complete();
 	}
+	public function get_friendship($me, $them){
+		$query = "SELECT friendships.created_at FROM users JOIN friendships ON users.id = friendships.user_id JOIN users as friends ON friendships.friend_id = friends.id WHERE users.id = ? AND friends.id = ?";
+		$values = [$me, $them];
+		return $this->db->query($query, $values)->result_array();
+	}
 
 	/*Friend Requests*/
+	public function get_requests($me){
+		$query = "SELECT concat(users.first_name, ' ', users.last_name) AS requestor_name, requestor_id FROM friend_requests JOIN users ON users.id = friend_requests.requestor_id WHERE recipient_id = ?";
+		return $this->db->query($query, $me)->result_array();
+	}
 	public function get_req_status($me, $them){
 		$query = "SELECT * FROM friend_requests WHERE (recipient_id = ? AND requestor_id = ?) OR (requestor_id = ? AND recipient_id = ?)";
-		$values = [$me, $them, $them, $me];
+		$values = [$me, $them, $me, $them];
 		return $this->db->query($query, $values)->row_array();
 	}
 	public function create_request($me, $them){
-		$query = "INSERT INTO friend_requests (recipient_id, requestor_id) VALUES (?,?)";
+		$query = "INSERT INTO friend_requests (requestor_id, recipient_id ,created_at) VALUES (?,?, NOW())";
 		$values = [$me, $them];
 		return $this->db->query($query, $values);
 	}

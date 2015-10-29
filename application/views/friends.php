@@ -31,19 +31,26 @@
 				</form>
 			</div>
 			<div class="row">
-				<div class="col m6 offset-m3">
+				<div class="col m5">
 					<ul class="collection with-header">
 						<li class="collection-header center-align"><h4>Friends</h4></li>
-						<?
-							foreach($friends as $friend){
-								?>
+						<? foreach($friends as $friend){ ?>
 								<li class="collection-item"><div><?= $friend['name'] ?><a href="/wishlists/friends_list/<?= $friend['user_id'] ?>" class="secondary-content"><i class="material-icons grey-text">view_list</i></a></div></li>
-						<?
-							}
-				       ?>
-
-				    </ul>
+						<? } ?>
+			    </ul>
 				</div> <!--end of col m6 -->
+				<div class="col m5 offset-m2">
+					<ul class="collection with-header">
+						<li class="collection-header center-align"><h4>Friend Requests</h4></li>
+						<? foreach($friend_requests as $request){ ?>
+								<li class="collection-item">
+									<div><?= $request['requestor_name'] ?>
+										<a href="/wishlists/friends_list/<?= $request['requestor_id'] ?>" class="secondary-content"><i class="material-icons grey-text">view_list</i></a>
+									</div>
+								</li>
+						<? } ?>
+			    </ul>
+				</div>
 			</div> <!-- end of row -->
 		</div> <!-- end of container -->	
 	</body>

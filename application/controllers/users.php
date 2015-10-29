@@ -56,102 +56,6 @@ class Users extends CI_Controller {
 		$this->session->set_userdata("last_name", $userinfo["last_name"]);
 		$this->session->set_userdata("email", $userinfo["email"]);
 	}
-	public function add_friend($me, $them){
-		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
-			$result = $this->user->create_request($me, $them);
-
-			if ($result) {
-				$success[] = 'Friend request sent.';
-	      $this->session->set_flashdata('success', $success);
-			}
-			else {
-				$errors = "Failed to send friend request.";
-				$this->session->set_flashdata('errors', $errors);
-			}
-			redirect("/main/show/$them"); //!!!!!may have to change later
-		}
-		redirect("/");
-	}
-	public function remove_friend($me, $them){
-		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
-			$result = $this->user->remove_friendship($me, $them);
-
-			if ($result) {
-				$success[] = 'Friend removed.';
-	      $this->session->set_flashdata('success', $success);
-			}
-			else {
-				$errors = "Unable to remove friend at this time.";
-				$this->session->set_flashdata('errors', $errors);
-			}
-		}
-		redirect("/");
-	}
-	public function cancel_friend_req($me, $them){
-		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
-			$result = $this->user->delete_request($me, $them);
-
-			if ($result) {
-				$success[] = 'Friend request cancelled.';
-	      $this->session->set_flashdata('success', $success);
-			}
-			else {
-				$errors = "Couldn't cancel friend request at this time.";
-				$this->session->set_flashdata('errors', $errors);
-			}
-			redirect("/main/show/$them"); //!!!!! may have to change later
-		}
-		redirect("/");
-	}
-	public function accept_friend_req($them, $me){
-		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
-			$result = $this->user->create_friendship($me, $them);
-
-			if ($result) {
-				$result = $this->user->delete_request($them, $me);
-
-				if ($result) {
-					$success[] = 'Friend added!';
-		      $this->session->set_flashdata('success', $success);
-				}
-				else{
-					$errors = "Couldn't add friend at this time, delreq failed.";
-					$this->session->set_flashdata('errors', $errors);
-				}
-			}
-			else {
-				$errors = "Couldn't add friend at this time.";
-				$this->session->set_flashdata('errors', $errors);
-			}
-			redirect("/main/show/$me"); //!!!!! may have to change later
-		}
-		redirect("/");
-	}
-	public function reject_friend_req($them, $me){
-		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
-			$result = $this->user->delete_request($them, $me);
-
-			if ($result) {
-				$success[] = 'Friend request ignored.';
-	      $this->session->set_flashdata('success', $success);
-			}
-			else {
-				$errors = "Couldn't ignore friend request at this time.";
-				$this->session->set_flashdata('errors', $errors);
-			}
-			redirect("/main/show/$me"); //!!!!! may have to change later
-		}
-		redirect("/");
-	}
-	public function find_user(){
-		$user = $this->user->get_user_by_email($this->input->post("email"));
-		$id = $user["id"];
-
-		if ($user) {
-			redirect("/wishlists/friends_list/$id");
-		}
-		redirect("/main/friends");
-	}
 	public function edit_info($target_id){
 		if ($this->session->userdata("id") && $this->session->userdata("id") == $target_id) {
 			$data = $this->input->post();
@@ -195,6 +99,103 @@ class Users extends CI_Controller {
 		}
 		redirect("/");
 	}
+	public function find_user(){
+		$user = $this->user->get_user_by_email($this->input->post("email"));
+		$id = $user["id"];
+
+		if ($user) {
+			redirect("/wishlists/friends_list/$id");
+		}
+		redirect("/main/friends");
+	}
+	public function add_friend($me, $them){
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
+			$result = $this->user->create_request($me, $them);
+
+			if ($result) {
+				$success[] = 'Friend request sent.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Failed to send friend request.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/wishlists/friends_list/$them"); //!!!!!may have to change later
+		}
+		redirect("/");
+	}
+	public function remove_friend($me, $them){
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
+			$result = $this->user->remove_friendship($me, $them);
+
+			if ($result) {
+				$success[] = 'Friend removed.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Unable to remove friend at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+		}
+		redirect("/main/friends");
+	}
+	public function cancel_friend_req($me, $them){
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
+			$result = $this->user->delete_request($me, $them);
+
+			if ($result) {
+				$success[] = 'Friend request cancelled.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Couldn't cancel friend request at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/wishlists/friends_list/$them"); //!!!!! may have to change later
+		}
+		redirect("/");
+	}
+	public function accept_friend_req($them, $me){
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
+			$result = $this->user->create_friendship($me, $them);
+
+			if ($result) {
+				$result = $this->user->delete_request($them, $me);
+
+				if ($result) {
+					$success[] = 'Friend added!';
+		      $this->session->set_flashdata('success', $success);
+				}
+				else{
+					$errors = "Couldn't add friend at this time, delreq failed.";
+					$this->session->set_flashdata('errors', $errors);
+				}
+			}
+			else {
+				$errors = "Couldn't add friend at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/main/friends"); //!!!!! may have to change later
+		}
+		redirect("/");
+	}
+	public function reject_friend_req($them, $me){
+		if ($this->session->userdata("id") && $this->session->userdata("id") == $me) {
+			$result = $this->user->delete_request($them, $me);
+
+			if ($result) {
+				$success[] = 'Friend request ignored.';
+	      $this->session->set_flashdata('success', $success);
+			}
+			else {
+				$errors = "Couldn't ignore friend request at this time.";
+				$this->session->set_flashdata('errors', $errors);
+			}
+			redirect("/main/friends"); //!!!!! may have to change later
+		}
+		redirect("/");
+	}
+	
 	public function delete($target_id){
 		if ($this->session->userdata("id") && $this->session->userdata("id") == $target_id) {
 			$result = $this->user->delete($target_id);
