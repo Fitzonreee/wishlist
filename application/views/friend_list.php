@@ -52,8 +52,8 @@
 	      	?>
 	      	<div class="col s12 m3">
 	          <div class="card grey lighten-1">
-	            <div class="card-content">
-	              <img src="<?= $item[$i]['image_url'] ?>" width= 100%>
+	            <div class="card-content center">
+	              <img src="<?= $item[$i]['image_url'] ?>" style="max-height: 180px; max-width: 180px;">
 	            </div>
 	            <div class="card-action padding_bottom">
 	              <a href="/main/info/<?= $item[$i]['product_id'] ?>"><span class="black-text title"><?= $item[$i]['name'] ?></span></a>
