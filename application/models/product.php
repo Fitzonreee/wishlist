@@ -26,8 +26,8 @@ class Product extends CI_Model {
 		return $this->db->query($query, $values);
 	}
 
-	public function get_all_based_on_preferences(){
-		$query = "SELECT * FROM products RIGHT JOIN preferences on products.category_id = preferences.category_id LEFT JOIN dislikes ON products.id = dislikes.product_id WHERE dislikes.user_id IS NULL";
+	public function get_all_based_on_dislikes(){
+		$query = "SELECT * FROM products LEFT JOIN dislikes ON products.id = dislikes.product_id WHERE dislikes.user_id IS NULL";
 		$values = [$this->session->userdata('id'), $this->session->userdata('id')];
 		return $this->db->query($query, $values)->result_array();
 	}

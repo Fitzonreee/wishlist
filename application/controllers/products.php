@@ -3,16 +3,7 @@
 class Products extends CI_Controller {
 
 	public function display_products($rand){
-		$products = $this->product->get_all_based_on_preferences();
-		// if(!($products)){
-			
-		// }
-		// else{
-		// 	if($rand != 'true'){
-		// 		unset($unique['products'][$rand]);
-		// 		$unique['products'] = array_values($unique['products']);
-
-		// 	}
+		$products = $this->product->get_all_based_on_dislikes();
 		$count = count($products);
 		for($i = 0; $i < $count; $i ++){
 			if($this->wishlist->get_item($products[$i]['id'])){
