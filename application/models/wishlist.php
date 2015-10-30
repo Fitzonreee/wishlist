@@ -3,7 +3,7 @@
 class Wishlist extends CI_Model {
 
 	public function get_all($id){
-		$query = "SELECT product_id, name, description, image_url, category_id, users.first_name, users.id FROM wishlists LEFT JOIN products ON wishlists.product_id = products.id LEFT JOIN users ON users.id = wishlists.user_id WHERE user_id = ?";
+		$query = "SELECT product_id, name, description, image_url, users.first_name, users.id FROM wishlists LEFT JOIN products ON wishlists.product_id = products.id LEFT JOIN users ON users.id = wishlists.user_id WHERE user_id = ?";
 		$values = [$id];
 		return $this->db->query($query, $values)->result_array();
 	}

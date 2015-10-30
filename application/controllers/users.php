@@ -23,7 +23,7 @@ class Users extends CI_Controller {
 		if (!$this->session->userdata("id")) {
 			redirect('/');
 		}
-		else redirect("/main/preferences");
+		else redirect("/main");
 	}
 	public function login(){
 		$result = $this->user->validate_login($this->input->post());

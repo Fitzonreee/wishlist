@@ -3,7 +3,7 @@
 class Cart extends CI_Model {
 
 	public function get_all(){
-		$query = "SELECT user_id, product_id, recipient_id, name, description, image_url, price, category_id, first_name, last_name FROM carts LEFT JOIN products ON carts.product_id = products.id LEFT JOIN users ON carts.recipient_id = users.id WHERE user_id = ?";
+		$query = "SELECT user_id, product_id, recipient_id, name, description, image_url, price, first_name, last_name FROM carts LEFT JOIN products ON carts.product_id = products.id LEFT JOIN users ON carts.recipient_id = users.id WHERE user_id = ?";
 		$values = [$this->session->userdata('id')];
 		return $this->db->query($query, $values)->result_array();
 	}
