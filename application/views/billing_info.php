@@ -41,17 +41,6 @@
 		  <button type="submit">Submit Payment</button>
 		</form>
 
-		<form action="/billing/bill_user" method="POST" class="center">
-			<script
-			src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-			data-key="pk_test_m7JCy0kSf4lkc0AghLPzwJp6"
-			data-name="Wishlist"
-			data-description""
-			data-amount=""
-			data-locale="auto"
-			data-shipping-address="true"
-			data-billing-address="false">
-			</script>
-		</form>
+		
 	</body>
 </html>

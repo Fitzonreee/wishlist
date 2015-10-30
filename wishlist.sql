@@ -86,6 +86,7 @@ DROP TABLE IF EXISTS `carts`;
 CREATE TABLE `carts` (
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `recipient_id` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`,`product_id`),
   KEY `fk_users_has_products_products1_idx` (`product_id`),
@@ -101,7 +102,7 @@ CREATE TABLE `carts` (
 
 LOCK TABLES `carts` WRITE;
 /*!40000 ALTER TABLE `carts` DISABLE KEYS */;
-INSERT INTO `carts` VALUES (1,2,'2015-10-28 10:12:09'),(1,3,'2015-10-28 10:20:32'),(1,4,'2015-10-28 10:12:20');
+INSERT INTO `carts` VALUES (1,2,2,'2015-10-28 10:12:09'),(1,3,3,'2015-10-28 10:20:32'),(1,4,4,'2015-10-28 10:12:20'),(2,2,5,'2015-10-29 19:01:54'),(2,5,5,'2015-10-29 19:01:40'),(5,3,4,'2015-10-29 18:54:52'),(5,5,1,'2015-10-29 18:21:14');
 /*!40000 ALTER TABLE `carts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,6 +156,7 @@ CREATE TABLE `dislikes` (
 
 LOCK TABLES `dislikes` WRITE;
 /*!40000 ALTER TABLE `dislikes` DISABLE KEYS */;
+INSERT INTO `dislikes` VALUES (3,1,'2015-10-29 20:27:33'),(3,4,'2015-10-29 22:01:29');
 /*!40000 ALTER TABLE `dislikes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +213,7 @@ CREATE TABLE `friendships` (
 
 LOCK TABLES `friendships` WRITE;
 /*!40000 ALTER TABLE `friendships` DISABLE KEYS */;
-INSERT INTO `friendships` VALUES (5,1,'2015-10-29 19:25:51'),(5,2,'2015-10-29 19:25:51'),(5,4,'2015-10-29 19:25:51');
+INSERT INTO `friendships` VALUES (2,4,'2015-10-29 19:06:20'),(2,5,'2015-10-29 18:55:49'),(4,2,'2015-10-29 19:06:20'),(4,5,'2015-10-29 19:04:15'),(5,2,'2015-10-29 18:55:49'),(5,4,'2015-10-29 19:04:15');
 /*!40000 ALTER TABLE `friendships` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,6 +257,7 @@ CREATE TABLE `products` (
   `name` varchar(70) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `image_url` varchar(255) DEFAULT NULL,
+  `price` float DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `category_id` int(11) NOT NULL,
@@ -270,7 +273,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Beats Solo HD Headphones','Headphones made by Beats','http://assets.red.org/content_images/777/overear-solo2-red-cmyk-thrqrtleft_355.png','2015-10-27 15:34:25','2015-10-27 15:34:25',1),(2,'iPhone','iPhone made by Apple','http://s.tmocache.com/content/dam/tmo/en-p/cell-phones/apple-iphone-6/all/stills/browse-apple-iphone-6-all.jpg/_jcr_content/renditions/cq5dam.web.280.280.jpeg','2015-10-27 15:35:07','2015-10-27 15:35:07',1),(3,'Toilet','Beautiful White Toilet','http://www.americanstandard-us.com/assets/images/components/033056711903.jpg','2015-10-27 18:58:31','2015-10-27 18:58:31',2),(4,'Tesla','A Fast Car','http://buyersguide.caranddriver.com/media/assets/submodel/6667.jpg','2015-10-27 19:00:37','2015-10-27 19:00:37',4),(5,'Toyota Rav4','A not so fast car','http://images.thecarconnection.com/sml/2015-toyota-rav4-fwd-4-door-limited-natl-angular-front-exterior-view_100488134_s.jpg','2015-10-27 19:01:49','2015-10-27 19:01:49',4),(6,'Double Cheeseburger','A healthy meal','http://static2.businessinsider.com/image/51f03f966bb3f73c7700000b/19-fast-food-hacks-that-will-change-the-way-you-order.jpg','2015-10-27 19:02:53','2015-10-27 19:02:53',3);
+INSERT INTO `products` VALUES (1,'Beats Solo HD Headphones','Headphones made by Beats','http://assets.red.org/content_images/777/overear-solo2-red-cmyk-thrqrtleft_355.png',299.99,'2015-10-27 15:34:25','2015-10-27 15:34:25',1),(2,'iPhone','iPhone made by Apple','http://s.tmocache.com/content/dam/tmo/en-p/cell-phones/apple-iphone-6/all/stills/browse-apple-iphone-6-all.jpg/_jcr_content/renditions/cq5dam.web.280.280.jpeg',699.99,'2015-10-27 15:35:07','2015-10-27 15:35:07',1),(3,'Toilet','Beautiful White Toilet','http://www.americanstandard-us.com/assets/images/components/033056711903.jpg',79.99,'2015-10-27 18:58:31','2015-10-27 18:58:31',2),(4,'Tesla','A Fast Car','http://buyersguide.caranddriver.com/media/assets/submodel/6667.jpg',100000,'2015-10-27 19:00:37','2015-10-27 19:00:37',4),(5,'Toyota Rav4','A not so fast car','http://images.thecarconnection.com/sml/2015-toyota-rav4-fwd-4-door-limited-natl-angular-front-exterior-view_100488134_s.jpg',39999,'2015-10-27 19:01:49','2015-10-27 19:01:49',4),(6,'Double Cheeseburger','A healthy meal','http://static2.businessinsider.com/image/51f03f966bb3f73c7700000b/19-fast-food-hacks-that-will-change-the-way-you-order.jpg',2.49,'2015-10-27 19:02:53','2015-10-27 19:02:53',3);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,7 +324,7 @@ CREATE TABLE `users` (
   `updated_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +333,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'mr','god','god@gmail.com','1234','','2015-10-27 18:56:54',NULL),(2,'a','Tang','ryantang333@gmail.com','f0b0548ee12b9997d3cce5e090e1f336','fd049276e0d87aa6661855da28add1b7ea98e91ede19','2015-10-29 11:48:07','2015-10-29 10:55:01'),(4,'e','e','e@1.com','cd956768e03723a204738d636485b230','e21357666a066356d7ff83df556bd46a24f48388828f','2015-10-29 11:00:56','2015-10-29 11:00:56'),(5,'Jolly','Rancher','a@1.com','1877ece9707026bec461704b39c0a579','5598fed57248910094295ddb429db507d15505b7c1d5','2015-10-29 13:11:23','2015-10-29 11:02:00'),(6,'Zufi','Zudi','z@gmail.com','842dd0d79293e3570246958b4d2b2834','e22289e47c16ba61c328470fbb057bfdd48bfb5db9ca','2015-10-29 13:11:58','2015-10-29 13:11:58');
+INSERT INTO `users` VALUES (1,'mr','god','god@gmail.com','1234','','2015-10-27 18:56:54',NULL),(2,'a','Tang','ryantang333@gmail.com','f0b0548ee12b9997d3cce5e090e1f336','fd049276e0d87aa6661855da28add1b7ea98e91ede19','2015-10-29 11:48:07','2015-10-29 10:55:01'),(4,'e','e','e@1.com','cd956768e03723a204738d636485b230','e21357666a066356d7ff83df556bd46a24f48388828f','2015-10-29 19:04:30','2015-10-29 11:00:56'),(5,'Jolly','Rancher','a@1.com','eb21a66f3938478e74b3ef14340872ae','5598fed57248910094295ddb429db507d15505b7c1d5','2015-10-29 19:04:39','2015-10-29 11:02:00'),(6,'Zufi','Zudi','z@gmail.com','78bb6d91c04e4bff99a79e3a79950298','e22289e47c16ba61c328470fbb057bfdd48bfb5db9ca','2015-10-29 19:04:50','2015-10-29 13:11:58'),(7,'Sean','Suyeda','s@gmail.com','24638829032a9f4b08ee8ee0ed24316c','3391bad77bdfa2d03f77ca336f68d43fdcc60dbc076a','2015-10-29 19:07:23','2015-10-29 19:07:23');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,7 +362,7 @@ CREATE TABLE `wishlists` (
 
 LOCK TABLES `wishlists` WRITE;
 /*!40000 ALTER TABLE `wishlists` DISABLE KEYS */;
-INSERT INTO `wishlists` VALUES (1,2,'2015-10-28 10:23:02'),(1,5,'2015-10-28 10:28:38'),(2,2,'2015-10-29 19:26:51'),(4,3,'2015-10-29 19:26:51'),(5,2,'2015-10-29 13:14:43'),(5,3,'2015-10-29 19:26:51');
+INSERT INTO `wishlists` VALUES (1,2,'2015-10-28 10:23:02'),(1,5,'2015-10-28 10:28:38'),(2,2,'2015-10-29 19:26:51'),(4,3,'2015-10-29 19:26:51'),(5,2,'2015-10-29 18:05:46'),(5,5,'2015-10-29 18:05:41'),(6,3,NULL);
 /*!40000 ALTER TABLE `wishlists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -372,4 +375,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-10-29 13:22:19
+-- Dump completed on 2015-10-29 19:11:18
