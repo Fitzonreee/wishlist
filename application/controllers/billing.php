@@ -38,6 +38,11 @@ class Billing extends CI_Controller {
 			  // The card has been declined
 			}
 		}
-		redirect("/carts/viewcart")
+		$cart_items = $this->cart->get_all();
+		foreach($cart_items as $item){
+			$this->cart->delete($item['product_id'],$item['recipient_id']);
+			$this->wishlist->delete_from_wishlist($item['product_id'],$item['recipient_id']);
+		}
+		redirect("/carts/viewcart");
 	}
 }
