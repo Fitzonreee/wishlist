@@ -154,6 +154,13 @@ class User extends CI_Model {
 		return $this->db->query($query, $id);
 	}
 
+	/*Billing*/
+	public function set_billing_id($billing_id){
+		$query = "UPDATE users SET billing_id = ?, updated_at = NOW() WHERE id = ?";
+		$values = [$billing_id, $this->session->userdata("id")];
+		return $this->db->query($query, $values);
+	}
+
 	/*Generic Getters*/
 	public function get_all(){
 		$query = "SELECT id, concat(first_name, ' ', last_name) AS name, email, date_created, user_level FROM users";
@@ -165,6 +172,10 @@ class User extends CI_Model {
 	}
 	public function get_user_by_id($id){
 		$query = "SELECT id, first_name, last_name, email FROM users WHERE id = ?";
+		return $this->db->query($query, $id)->row_array();
+	}
+	public function get_billing_id($id){
+		$query = "SELECT billing_id FROM users WHERE id = ?";
 		return $this->db->query($query, $id)->row_array();
 	}
 

@@ -38,4 +38,7 @@ class Main extends CI_Controller {
 		$item['info'] = $this->product->get_product($id);
 		$this->load->view('product_info', $item);
 	}
+	public function test(){
+		$this->load->view('billing_info');
+	}
 }

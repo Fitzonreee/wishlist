@@ -10,39 +10,48 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href='https://fonts.googleapis.com/css?family=Raleway:200,100' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+		<script type="text/javascript">
+		  Stripe.setPublishableKey('pk_test_m7JCy0kSf4lkc0AghLPzwJp6');
+		</script>
 	</head>
 	<body>
-		<button id="customButton">Purchase</button>
+		<form action="" method="POST" id="payment-form">
+		  <span class="payment-errors"></span>
+		  <div class="form-row">
+		    <label>
+		      <span>Card Number</span>
+		      <input type="text" size="20" data-stripe="number"/>
+		    </label>
+		  </div>
+		  <div class="form-row">
+		    <label>
+		      <span>CVC</span>
+		      <input type="text" size="4" data-stripe="cvc"/>
+		    </label>
+		  </div>
+		  <div class="form-row">
+		    <label>
+		      <span>Expiration (MM/YYYY)</span>
+		      <input type="text" size="2" data-stripe="exp-month"/>
+		    </label>
+		    <span> / </span>
+		    <input type="text" size="4" data-stripe="exp-year"/>
+		  </div>
+		  <button type="submit">Submit Payment</button>
+		</form>
 
-		<script src="https://checkout.stripe.com/checkout.js"></script>
-		<script>
-		  var handler = StripeCheckout.configure({
-		    key: 'pk_test_m7JCy0kSf4lkc0AghLPzwJp6',
-		    image: '',
-		    locale: 'auto',
-		    token: function(token) {
-		      // Use the token to create the charge with a server-side script.
-		      // You can access the token ID with `token.id`
-		      $.post("/billing/bill_user", token, function(res) {
-		      	console.log(token.id);
-		      });
-		    }
-		  });
-
-		  $('#customButton').on('click', function(e) {
-		    handler.open({
-		      name: 'Wishlist',
-		      description: 'Product',//insert php here
-		      amount: 2000 //here too
-		    });
-		    e.preventDefault();
-		  });
-
-		  $(window).on('popstate', function() {
-		    handler.close();
-		  });
-		</script>
-
-		
+		<form action="/billing/bill_user" method="POST" class="center">
+			<script
+			src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+			data-key="pk_test_m7JCy0kSf4lkc0AghLPzwJp6"
+			data-name="Wishlist"
+			data-description""
+			data-amount=""
+			data-locale="auto"
+			data-shipping-address="true"
+			data-billing-address="false">
+			</script>
+		</form>
 	</body>
 </html>
