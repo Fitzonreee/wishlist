@@ -6,7 +6,6 @@ class Main extends CI_Controller {
 		if (!$this->session->userdata("id")) {
 			redirect("/");
 		}
-		// $this->output->enable_profiler(TRUE);
 	}
 	public function index(){
 		redirect('products/display_products/true');

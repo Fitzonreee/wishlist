@@ -14,6 +14,7 @@
 <?php
 @include('partials/nav_logged_in.php');
 $rand = rand(0, count($products) - 1);
+
 ?>
 
 		<div class="container">
@@ -23,15 +24,16 @@ $rand = rand(0, count($products) - 1);
 	          <div class="card">
 	          	<!-- size of area will change depending on the size of img-->
 	            <div class="card-image">
-	              <img src="<?= $products[$rand]['image_url'] ?>">
+	              <img src="<?= $products[$rand]['image_url'] ?>" style = 'width: 100%'>
 	            </div>
 	            <div class="card-content">
 	              <span class="card-title black-text"><?= $products[$rand]['name'] ?></span>
 	              <p><?= $products[$rand]['description'] ?></p>
 	            </div>
 	              <div class="card-action grey lighten-1">
+	              <div class="row">
 	              	<form action ="/products/add/<?= $products[$rand]['id'] ?>/<?= $rand ?>">
-	              	 	<button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text" type="submit" name="action">Add to My List
+	              	 	<button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text left" type="submit" name="action">Add to My List
 				    	<i class="material-icons right">add</i>
 				    	</button>
 					</form>
@@ -39,6 +41,7 @@ $rand = rand(0, count($products) - 1);
 	       		  		<button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text right" type="submit" name="action">Next
 				  		</button>
 				  	</form>
+				  </div>
 	            </div>
 	          </div>
 	        </div>
