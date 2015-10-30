@@ -19,9 +19,14 @@ class Carts extends CI_Controller {
 		
 	}
 	public function viewcart(){
-		$data['items'] = $this->cart->get_all();
-
-		$this->load->view('cart', $data);
+		$items = $this->cart->get_all();
+		$sum = 0;
+		foreach($items as $item){
+          	$sum += $item['price'];
+      	}
+      	$items['sum'] = number_format($sum,2,'.',',');
+      	$data['items'] = $items;
+      	$this->load->view('cart', $data);
 	}
 
 

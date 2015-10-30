@@ -18,11 +18,10 @@
 		  <div class="row">
 	        <div class="col s12 m8 offset-m2">
 	        	<h4 class="form_label">Wait a tick!</h4>
-	          	<h5 class="center-align">You already added this item to your list.</h5>
+	          	<h5 class="center-align">All items are already on your Wishlist!</h5>
 	          	<h6 class="center-align"><a href="/wishlists/my_list" class="waves-effect waves-light btn-large amber accent-2 black-text" >Back to my Wishlist</a></h6>
 	        </div>
 	      </div>
 		</div> <!-- end of container -->
 	</body>
 </html>
-

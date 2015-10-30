@@ -16,22 +16,23 @@
 ?>
 		<div class="container">
   			<div class="row">
-			<h4 class="form_label"><?= $data[0]['first_name']?>'s Wishlist</h4>
+			<h4 class="form_label"><?= $item[count($item) - 1] ?>'s Wishlist</h4>
 	      <?
-	      	foreach($data as $item){ ?>
+	      for($i = 0; $i < count($item) - 1; $i ++){
+	      	?>
 	      	<div class="col s12 m3">
 	          <div class="card grey lighten-1">
 	            <div class="card-content">
-	              <img src="<?= $item['image_url'] ?>" width= 100%>
+	              <img src="<?= $item[$i]['image_url'] ?>" width= 100%>
 	            </div>
 	            <div class="card-action padding_bottom">
-	              <a href="/main/info/<?= $item['product_id'] ?>"><span class="black-text title"><?= $item['name'] ?></span></a>
-	              <a href="/wishlists/add_my_list/<?= $item['product_id'] ?>"><i class="material-icons amber-text accent-2-text right">add</i></a>
+	              <a href="/main/info/<?= $item[$i]['product_id'] ?>"><span class="black-text title"><?= $item[$i]['name'] ?></span></a>
+	              <a href="/wishlists/add_my_list/<?= $item[$i]['product_id'] ?>"><i class="material-icons amber-text accent-2-text right">add</i></a>
 	              <!-- CHECKOUT BUTTON -->
 					<form action = "/carts/add" method = "post">
 						<div>
-						  <input type = "hidden" name = "product_id" value = "<?= $item['product_id'] ?>">
-	              	      <input type = "hidden" name = "recipient_id" value = "<?= $item['id'] ?>">
+						  <input type = "hidden" name = "product_id" value = "<?= $item[$i]['product_id'] ?>">
+	              	      <input type = "hidden" name = "recipient_id" value = "<?= $item[$i]['id'] ?>">
 					 	  <button class="waves-effect waves-light btn amber accent-2 black-text center buy" type="submit" name="action"><i class="material-icons left black-text">payment</i>Buy Gift</button>
 						</div>
 					</form>

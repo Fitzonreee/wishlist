@@ -3,19 +3,45 @@
 class Products extends CI_Controller {
 
 	public function display_products($rand){
-		$unique['products'] = $this->product->get_all_based_on_preferences();
-		if(!($unique['products'])){
-			$unique['products'] = 'All possible items added to wishlist!';
-			$this->load->view('product', $unique);
+		$products = $this->product->get_all_based_on_preferences();
+		// if(!($products)){
+			
+		// }
+		// else{
+		// 	if($rand != 'true'){
+		// 		unset($unique['products'][$rand]);
+		// 		$unique['products'] = array_values($unique['products']);
+
+		// 	}
+		$count = count($products);
+		for($i = 0; $i < $count; $i ++){
+			if($this->wishlist->get_item($products[$i]['id'])){
+				unset($products[$i]);
+			}
+		}
+		$products = array_values($products);
+		$unique['products'] = $products;
+		if(empty($products)){
+			$this->load->view('errors2');
 		}
 		else{
-			if($rand != 'true'){
-				unset($unique['products'][$rand]);
-				$unique['products'] = array_values($unique['products']);
-
-			}
 			$this->load->view('product', $unique);
 		}
+		}
+
+	public function dislike($id){
+		$this->product->dislike($id);
+		if(!($this->product->check_wishlist($id))){
+			$this->product->delete_wishlist($id);
+		}
+		redirect('/products/display_products/true');
 	}
 
+	public function add($id, $index){
+		$this->wishlist->add($id);
+		redirect('/products/display_products/true');
+	}
+	public function main(){
+		$this->load->view('product');
+	}
 }

@@ -43,7 +43,16 @@ class Wishlists extends CI_Controller {
 	}
 
 	public function friends_list($id){
-		$list['data'] = $this->wishlist->get_all($id);
+		$items_on_wishlist = $this->wishlist->get_all($id);
+		$name = $items_on_wishlist[0]['first_name'];
+		$new_wishlist = [];
+		foreach($items_on_wishlist as $item){
+			if(empty($this->cart->in_cart($item['product_id'], $id))){
+				$new_wishlist[] = $item;
+			}
+		}
+		$new_wishlist[] = $name;
+		$list['item'] = $new_wishlist;
 		$this->load->view('friend_list', $list);
 	}
 
