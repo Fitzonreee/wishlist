@@ -21,14 +21,14 @@ $rand = rand(0, count($products) - 1);
 		  <div class="row">
 	        <div class="col s12 m8 offset-m2">
 	        <h4 class="form_label">Add items to your wishlist!</h4>
-	          <div class="card">
+	          <div class="card center">
 	          	<!-- size of area will change depending on the size of img-->
-	            <div class="card-image">
-	              <img src="<?= $products[$rand]['image_url'] ?>" style = 'width: 100%'>
+	            <div class="card-image center">
+	              <img src="<?= $products[$rand]['image_url'] ?>" style = 'width: 60%; margin-left: auto; margin-right: auto; padding-top: 20px'>
 	            </div>
-	            <div class="card-content">
+	            <div class="center">
 	              <span class="card-title black-text"><?= $products[$rand]['name'] ?></span>
-	              <p><?= $products[$rand]['description'] ?></p>
+	              <p style = 'height: 60px'><?= $products[$rand]['description'] ?></p>
 	            </div>
 	              <div class="card-action grey lighten-1">
 	              <div class="row">

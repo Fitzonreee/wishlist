@@ -59,8 +59,9 @@ body {
 	margin-top: 30px;
 }
 
-.card-content img {
-	width: 100% !important;
+.card-content {
+	height: 250px !important;
+	
 }
 
 #collection_top {
@@ -201,6 +202,20 @@ table td, th {
 .remove {
 	margin-left: 20px;
 }
+
+/*************************
+	   Added Today
+*************************/
+
+.trash {
+	margin-left: 0 !important;
+}
+
+
+
+
+
+
 
 
 

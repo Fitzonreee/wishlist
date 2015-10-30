@@ -21,13 +21,13 @@
 	      	foreach($items as $item){ 
 	      ?>
 	      	<div class="col s12 m3">
-	          <div class="card grey lighten-1">
-	            <div class="card-content">
-	              <img src="<?= $item['image_url']?>" width= 100%>
+	          <div class="card grey lighten-1 small">
+	            <div class="card-content center">
+	              <img src="<?= $item['image_url']?>" style="max-height: 180px; max-width: 180px;">
 	            </div>
-	            <div class="card-action">
+	            <div class="card-action item_action">
             	  <a href="/main/info/<?= $item['product_id'] ?>"><span class="black-text title"><?= $item['name'] ?></span></a>
-	              <a href="/wishlists/delete/<?= $item['product_id'] ?>"><i class="material-icons amber-text accent-2-text right">delete</i></a>
+	              <a href="/wishlists/delete/<?= $item['product_id'] ?>"><i class="material-icons amber-text accent-2-text right trash">delete</i></a>
 	            </div>
 	          </div>
 	        </div>

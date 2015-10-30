@@ -53,10 +53,12 @@ class User extends CI_Model {
 	private function verify_user($email, $pass){
 		$query = "SELECT * FROM users WHERE email = ?";
 		$temp = $this->db->query($query, $email)->row_array();
-		if ($this->check_encryption($pass, $temp["salt"]) == $temp['password']) {
-			return true;
+		if ($temp) {
+			if ($this->check_encryption($pass, $temp["salt"]) == $temp['password']) {
+				return true;
+			}
+			else return false;
 		}
-		else return false;
 	}
 	private function check_encryption($pass, $salt){
 		$encryptpass = md5($pass . '' . $salt);
