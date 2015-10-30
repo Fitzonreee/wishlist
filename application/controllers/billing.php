@@ -29,7 +29,7 @@ class Billing extends CI_Controller {
 			  $charge = \Stripe\Charge::create(array(
 			    "amount" => $total,
 			    "currency" => "usd",
-			    "source" => $customer["source"],
+			    "customer" => $customer["id"],
 			    "description" => "Example charge"
 			    ));
 			} catch(\Stripe\Error\Card $e) {
