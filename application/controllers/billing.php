@@ -11,8 +11,10 @@ class Billing extends CI_Controller {
 		\Stripe\Stripe::setApiKey("sk_test_BzcfGDAVwQw9efuWp2eVvyVg");
 		$stripe_info = $this->input->post();
 		$billing = $this->user->get_billing_id($this->session->userdata("id"));
-		$total = $this->cart->get_total($this->cart->get_all());
-		if ($billing) {
+		$total = $this->cart->get_total_cents($this->cart->get_all());
+		if ($billing["billing_id"]) {
+			// var_dump($total);
+			// die();
 			\Stripe\Charge::create(array(
 		  "amount"   => $total,
 		  "currency" => "usd",
@@ -36,5 +38,6 @@ class Billing extends CI_Controller {
 			  // The card has been declined
 			}
 		}
+		redirect("/carts/viewcart")
 	}
 }

@@ -35,12 +35,11 @@ class User extends CI_Model {
 
 	/*Login*/
 	public function validate_login($data){
-    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|required|valid_email|!is_unique[users.email]');
+    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|required|valid_email|');
     $this->form_validation->set_rules('password', 'Password', 'real_escape_string|xss_clean|trim|required|min_length[1]');
 
     if($this->form_validation->run()) {
     	if ($this->verify_user($data["email"], $data["password"])) {
-
       	return "valid";
     	}
     	else {
@@ -53,10 +52,12 @@ class User extends CI_Model {
 	private function verify_user($email, $pass){
 		$query = "SELECT * FROM users WHERE email = ?";
 		$temp = $this->db->query($query, $email)->row_array();
-		if ($this->check_encryption($pass, $temp["salt"]) == $temp['password']) {
-			return true;
+		if ($temp) {
+			if ($this->check_encryption($pass, $temp["salt"]) == $temp['password']) {
+				return true;
+			}
+			else return false;
 		}
-		else return false;
 	}
 	private function check_encryption($pass, $salt){
 		$encryptpass = md5($pass . '' . $salt);

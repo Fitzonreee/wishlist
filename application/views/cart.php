@@ -20,16 +20,16 @@
 				<div class="col s12 m8 offset-m2">
 					<h4 class="form_label">Your Cart</h4>
 					<div class="row">
-				      <table class="striped">
+			      <table class="striped">
 					    <thead>
 					      <tr>
-					          <th data-field="id">Item</th>
-							  <th data-field="recipient">Recipient</th>
-					          <th data-field="price">Price</th>
-					          <th data-field="remove">Remove</th>
+				          <th data-field="id">Item</th>
+						  		<th data-field="recipient">Recipient</th>
+				          <th data-field="price">Price</th>
+				          <th data-field="remove">Remove</th>
 					      </tr>
 					    </thead>
-						<tbody>
+							<tbody>
 							<?
 							for($i = 0; $i < count($items) - 1; $i ++){ 
 
