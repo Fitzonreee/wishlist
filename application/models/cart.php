@@ -27,5 +27,13 @@ class Cart extends CI_Model {
 		$values = [$product_id, $recipient_id];
 		return $this->db->query($query, $values)->row_array();
 	}
+	public function get_total($items){
+		$sum = 0;
+		foreach($items as $item){
+          	$sum += $item['price'];
+      	}
+      	$sum = number_format($sum,2,'.',',');
+      	return $sum;
+	}
 
 }

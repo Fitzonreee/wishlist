@@ -53,7 +53,7 @@
 					    <thead>
 					      <tr>
 					          <th data-field="id">Total:</th>
-					          <th data-field="price" id="total">$<?= $items['sum'] ?></th>
+					          <th data-field="price" id="total">$<?= $items['total'] ?></th>
 					      </tr>
 					    </thead>
 					  </table>
