@@ -31,5 +31,11 @@ class Wishlist extends CI_Model {
 		$values = [$id, $this->session->userdata('id')];
 		return $this->db->query($query, $values);
 	}
+	// Delete item from any user's wishlist
+	public function delete_from_wishlist($id, $recipient_id){
+		$query = "DELETE FROM wishlists WHERE product_id = ? AND user_id = ?";
+		$values = [$id, $recipient_id];
+		return $this->db->query($query, $values);
+	}
 
 }
