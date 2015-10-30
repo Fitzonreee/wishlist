@@ -8,41 +8,33 @@ class Billing extends CI_Controller {
 		$this->output->enable_profiler(TRUE);
 	}
 	public function bill_user(){
-		// Set your secret key: remember to change this to your live secret key in production
-		// See your keys here https://dashboard.stripe.com/account/apikeys
 		\Stripe\Stripe::setApiKey("sk_test_BzcfGDAVwQw9efuWp2eVvyVg");
-
-		// Get the credit card details submitted by the form
-		$strip_info = $this->input->post();
-
-		var_dump($stripe_info);
-		die();
-
-		// Create a Customer
-		$customer = \Stripe\Customer::create(array(
-		  "source" => $token,
-		  "description" => "Example customer")
-		);
-
-		
-		// Charge the Customer instead of the card
-		\Stripe\Charge::create(array(
-		  "amount" => 1000, # amount in cents, again
+		$stripe_info = $this->input->post();
+		$billing = $this->user->get_billing_id($this->session->userdata("id"));
+		$total = $this->cart->get_total($this->cart->get_all());
+		if ($billing) {
+			\Stripe\Charge::create(array(
+		  "amount"   => $total,
 		  "currency" => "usd",
-		  "customer" => $customer->id)
-		);
-
-		# YOUR CODE: Save the customer ID and other info in a database for later!
-
-		# YOUR CODE: When it's time to charge the customer again, retrieve the customer ID!
-
-		\Stripe\Charge::create(array(
-		  "amount"   => 1500, # $15.00 this time
-		  "currency" => "usd",
-		  "customer" => $customerId # Previously stored, then retrieved
+		  "customer" => $billing["billing_id"]
 		  ));
+		}
+		else{
+			$customer = \Stripe\Customer::create(array(
+			  "source" => $stripe_info["stripeToken"],
+			  "description" => "Example customer")
+			);
+			$this->user->set_billing_id($customer["id"]);
+			try {
+			  $charge = \Stripe\Charge::create(array(
+			    "amount" => $total,
+			    "currency" => "usd",
+			    "source" => $customer["source"],
+			    "description" => "Example charge"
+			    ));
+			} catch(\Stripe\Error\Card $e) {
+			  // The card has been declined
+			}
+		}
 	}
-	//add billing info
-	//add shipping info
-	//edit those
 }
