@@ -16,9 +16,6 @@ class Main extends CI_Controller {
 		$data["friend_requests"] = $this->user->get_requests($this->session->userdata('id'));
 		$this->load->view('friends', $data);
 	}
-	public function preferences(){
-		$this->load->view('preferences');
-	}
 	public function friend_list(){
 		$this->load->view('friend_list');
 	}
