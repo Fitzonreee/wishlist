@@ -35,7 +35,7 @@ class User extends CI_Model {
 
 	/*Login*/
 	public function validate_login($data){
-    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|required|valid_email|');
+    $this->form_validation->set_rules('email', 'Email', 'real_escape_string|xss_clean|trim|required|valid_email');
     $this->form_validation->set_rules('password', 'Password', 'real_escape_string|xss_clean|trim|required|min_length[1]');
 
     if($this->form_validation->run()) {

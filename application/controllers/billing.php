@@ -13,8 +13,6 @@ class Billing extends CI_Controller {
 		$billing = $this->user->get_billing_id($this->session->userdata("id"));
 		$total = $this->cart->get_total_cents($this->cart->get_all());
 		if ($billing["billing_id"]) {
-			// var_dump($total);
-			// die();
 			\Stripe\Charge::create(array(
 		  "amount"   => $total,
 		  "currency" => "usd",
@@ -38,6 +36,6 @@ class Billing extends CI_Controller {
 			  // The card has been declined
 			}
 		}
-		redirect("/carts/viewcart")
+		redirect("/carts/viewcart");
 	}
 }
