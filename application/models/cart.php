@@ -41,5 +41,13 @@ class Cart extends CI_Model {
       	$sum = number_format($sum,2,'.',',');
       	return $sum;
 	}
+	// Returns total price of cart in cents
+	public function get_total_cents($items){
+		$sum = 0;
+		foreach($items as $item){
+    	$sum += $item['price'];
+  	}
+  	return $sum*100;
+	}
 
 }

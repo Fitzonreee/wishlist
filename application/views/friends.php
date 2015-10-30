@@ -16,6 +16,7 @@
 ?>
 		<div class="container">
 			<div class="row"  id="collection_top">
+			<div class="nav-wrapper">
 				<form action="/users/find_user" method="post">
 					<div class="col m6 offset-m3">
 						<div class="input-field grey lighten-4">
@@ -29,6 +30,7 @@
 						</div>
 					</div>
 				</form>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col m5">

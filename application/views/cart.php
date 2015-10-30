@@ -20,16 +20,16 @@
 				<div class="col s12 m8 offset-m2">
 					<h4 class="form_label">Your Cart</h4>
 					<div class="row">
-				      <table class="striped">
+			      <table class="striped">
 					    <thead>
 					      <tr>
-					          <th data-field="id">Item</th>
-							  <th data-field="recipient">Recipient</th>
-					          <th data-field="price">Price</th>
-					          <th data-field="remove">Remove</th>
+				          <th data-field="id">Item</th>
+						  		<th data-field="recipient">Recipient</th>
+				          <th data-field="price">Price</th>
+				          <th data-field="remove">Remove</th>
 					      </tr>
 					    </thead>
-						<tbody>
+							<tbody>
 							<?
 							for($i = 0; $i < count($items) - 1; $i ++){ 
 
@@ -60,18 +60,18 @@
 					</div> <!-- end of row -->
 
 					<div class="row">
-				    	<form action="/billing/bill_user" method="POST" class="right">
-				          <script
-				            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-				            data-key="pk_test_m7JCy0kSf4lkc0AghLPzwJp6"
-				            data-image="/img/documentation/checkout/marketplace.png"
-				            data-name="Demo Site"
-				            data-description="2 widgets"
-				            data-amount="2000"
-				            data-locale="auto"
-				            data-billing-address="true">
-				          </script>
-				        </form>
+			    	<form action="/billing/bill_user" method="POST" class="right">
+							<script
+							src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+							data-key="pk_test_m7JCy0kSf4lkc0AghLPzwJp6"
+							data-name="Wishlist"
+							data-description""
+							data-amount=""
+							data-locale="auto"
+							data-shipping-address="true"
+							data-billing-address="false">
+							</script>
+						</form>
 					</div> <!-- end of row -->
 				</div>
 			</div>

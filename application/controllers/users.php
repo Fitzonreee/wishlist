@@ -21,10 +21,9 @@ class Users extends CI_Controller {
 		}
 
 		if (!$this->session->userdata("id")) {
-			// !!!!! change to external index
 			redirect('/');
 		}
-		else redirect("/main"); // !!!!! change to internal home
+		else redirect("/main");
 	}
 	public function login(){
 		$result = $this->user->validate_login($this->input->post());
