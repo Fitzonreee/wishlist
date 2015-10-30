@@ -43,11 +43,23 @@ class Wishlists extends CI_Controller {
 	public function friends_list($id){
 		if ($this->session->userdata("id") != $id) {
 			$me = $this->session->userdata("id");
-			$data['data'] = $this->wishlist->get_all($id);
 			$friendship_status = $this->user->get_friendship($me, $id);
+			$data["friend_id"] = $id;
+			$friend = $this->user->get_user_by_id($id);
+			
+
 			if ($friendship_status) {
 				$data["friend_status"] = "friends";
+				$items_on_wishlist = $this->wishlist->get_all($id);
+				$new_wishlist = [];
+				foreach($items_on_wishlist as $item){
+					if(empty($this->cart->in_cart($item['product_id'], $id))){
+						$new_wishlist[] = $item;
+					}
+				}
+				$data['item'] = $new_wishlist;
 			}
+
 			else {
 				$req_status = $this->user->get_req_status($me, $id);
 				if (empty($req_status)) {
@@ -60,11 +72,12 @@ class Wishlists extends CI_Controller {
 					$data["friend_status"] = "accept";
 				}
 			}
-			$data["friend_id"] = $id;
+			$data['name'] = $friend['first_name'];
 			$this->load->view('friend_list', $data);
 		}
-		else
+		else{
 			redirect("/wishlists/my_list");
+		}
 	}
 
 	public function delete($id){

@@ -13,7 +13,6 @@
 	<body>
 <?php
 @include('partials/nav_logged_in.php');
-var_dump($products);
 $rand = rand(0, count($products) - 1);
 ?>
 
@@ -31,11 +30,15 @@ $rand = rand(0, count($products) - 1);
 	              <p><?= $products[$rand]['description'] ?></p>
 	            </div>
 	              <div class="card-action grey lighten-1">
-	               <button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text" type="submit" name="action">Add to My List
-				    <i class="material-icons right">add</i>
-				  </button>
-	       		  <button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text right" type="submit" name="action">Next
-				  </button>
+	              	<form action ="/products/add/<?= $products[$rand]['id'] ?>/<?= $rand ?>">
+	              	 	<button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text" type="submit" name="action">Add to My List
+				    	<i class="material-icons right">add</i>
+				    	</button>
+					</form>
+				  	<form action ="/products/dislike/<?= $products[$rand]['id'] ?>/">
+	       		  		<button class="btn waves-effect waves-light grey darken-3 amber-text accent-2-text right" type="submit" name="action">Next
+				  		</button>
+				  	</form>
 	            </div>
 	          </div>
 	        </div>

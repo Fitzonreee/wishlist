@@ -19,9 +19,11 @@ class Carts extends CI_Controller {
 		
 	}
 	public function viewcart(){
-		$data['items'] = $this->cart->get_all();
-
-		$this->load->view('cart', $data);
+		$items = $this->cart->get_all();
+		$total = $this->cart->get_total($items);
+      	$items['total'] = $total;
+      	$data['items'] = $items;
+      	$this->load->view('cart', $data);
 	}
 
 

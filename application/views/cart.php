@@ -31,13 +31,14 @@
 					    </thead>
 						<tbody>
 							<?
-							foreach($items as $item){ 
+							for($i = 0; $i < count($items) - 1; $i ++){ 
+
 							?>
 								<tr>
-									<td><?= $item['name'] ?></td>
-									<td><?= $item['first_name']." ".$item['last_name'] ?></td>
-									<td>$ <?= number_format($item['price'],2,'.',',') ?></td>
-									<td><a href="/carts/remove/<?= $item['product_id'] ?>/<?= $item['recipient_id'] ?>"><i class="material-icons remove black-text">delete</i></a></td>
+									<td><?= $items[$i]['name'] ?></td>
+									<td><?= $items[$i]['first_name']." ".$items[$i]['last_name'] ?></td>
+									<td>$ <?= number_format($items[$i]['price'],2,'.',',') ?></td>
+									<td><a href="/carts/remove/<?= $items[$i]['product_id'] ?>/<?= $items[$i]['recipient_id'] ?>"><i class="material-icons remove black-text">delete</i></a></td>
 								</tr>
 						<?
 						}
@@ -52,13 +53,7 @@
 					    <thead>
 					      <tr>
 					          <th data-field="id">Total:</th>
-					      <?
-					      	$sum = 0;
-					        foreach($items as $item){
-					          	$sum += $item['price'];
-					      	}
-					      ?>
-					          <th data-field="price" id="total">$<?= number_format($sum,2,'.',',') ?></th>
+					          <th data-field="price" id="total">$<?= $items['total'] ?></th>
 					      </tr>
 					    </thead>
 					  </table>

@@ -13,6 +13,7 @@ class Wishlist extends CI_Model {
 		return $this->db->query($query, $values)->row_array();
 	}
 	public function add($id){
+		// var_dump($this->session->userdata('id'));
 		$query = "INSERT INTO wishlists (user_id, product_id, created_at) VALUES (?,?, NOW())";
 		$values = [$this->session->userdata('id'), $id];
 		return $this->db->query($query, $values);
