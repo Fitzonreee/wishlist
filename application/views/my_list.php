@@ -20,7 +20,7 @@
 	      <?
 	      	foreach($items as $item){ 
 	      ?>
-	      	<div class="col s12 m3">
+	      	<div class="col s12 m4">
 	          <div class="card grey lighten-1">
 	            <div class="card-content">
 	              <img src="<?= $item['image_url']?>" width= 100%>
